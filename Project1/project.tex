@@ -1,0 +1,62 @@
+\documentclass[reprint,english]{revtex4-1}
+
+% language
+\usepackage[utf8]{inputenc}
+\usepackage[english]{babel}
+
+% standard setup
+\usepackage{physics,amssymb,array}
+\usepackage{xcolor,graphicx,hyperref}
+\usepackage{tikz,listings,multirow}
+\usepackage{subfigure}
+\usepackage{enumitem}
+
+% hyperref coloring
+\hypersetup{ %
+  colorlinks,
+  linkcolor={red!50!black},
+  citecolor={blue!50!black},
+  urlcolor={blue!80!black}}
+
+% lstlisting coloring
+\lstset{ %
+  inputpath=,
+  backgroundcolor=\color{white!88!black},
+  basicstyle={\ttfamily\scriptsize},
+  commentstyle=\color{magenta},
+  language=C++,
+  tabsize=2,
+  stringstyle=\color{green!55!black},
+  frame=single,
+  keywordstyle=\color{blue},
+  showstringspaces=false,
+  columns=fullflexible,
+  keepspaces=true}
+
+% simplify
+\newcommand{\Ham}{\hat{\mathcal{H}}}
+
+\begin{document}
+% titlepage
+\title{FYS3155 Machine Learning - Project 1\\Regression Analysis}
+\author{Nils Johannes Mikkelsen}
+\date{\today}
+\noaffiliation
+\begin{abstract}
+something abstract
+\end{abstract}
+\maketitle
+
+% body
+\section{Introduction}
+\section{Theory}
+\section{Method}
+
+\section{Results}
+\section{Discussion}
+\section{Conclusion}
+
+\nocite{lecture_ode}\nocite{lecture_linalg}\nocite{eigenvalues}
+\bibliographystyle{plain}
+\bibliography{references}
+\end{document}

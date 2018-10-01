@@ -1,4 +1,4 @@
-import sys
+import sys,os,shutil
 import numpy as np
 import numpy.linalg as la
 import numpy.random as rand
@@ -39,13 +39,24 @@ class LinearRegression():
     resampling | bool that indicates whether to employ resampling techniques
   """
   # initial setup
-  def __init__(self,X,Y):
+  def __init__(self,X,Y,foldername=None):
+    # setup folder system
+    if not os.path.isdir("./results"): os.mkdir("./results")
+    if foldername is None:
+          self.dirpath = "./results/{:d}".format(len([sub[0] for sub in os.walk("./results")]))
+    else: self.dirpath = "./results/"+str(foldername)
+    if os.path.isdir(self.dirpath):
+      duplicate     = sum([self.dirpath[10:] in subdir for subdir in [k[0][10:] for k in os.walk("./results/")]])
+      self.dirpath += "{:d}".format(duplicate+1)
+    os.mkdir(self.dirpath); self.dirpath += '/'
+    # setup regression
     self.X_input    = X if len(X.shape) == 2 else X[:,None]
     self.Y_output   = Y if len(Y.shape) == 2 else Y[:,None]
     self.N          = int(len(Y))
     self.p          = int(len(X.T))
     self.model      = {}
     self.method     = "OLS"
+    self.technique  = ""
     self.resampling = False
   
   # add a model to the analysis
@@ -54,7 +65,7 @@ class LinearRegression():
     if name in self.model.keys():
       print("Model name '{:s}' is unavailable.".format(name))
       sys.exit(1)
-    self.model[name] = RegressionModel(F)
+    self.model[name] = RegressionModel(F,name)
   
   # select regression method
   def use_method(self, method):
@@ -97,7 +108,7 @@ class LinearRegression():
           R2_sample  += self.model[key].R2
           l          += 1.
         self.model[key].MSE_sample, self.model[key].R2_sample = MSE_sample/l, R2_sample/l
-        
+      self.model[key].NumPy_save(self.dirpath,self.method,self.technique,alpha,self.resampling)
 
 # user-defined regression models
 class RegressionModel():
@@ -116,9 +127,12 @@ class RegressionModel():
     R2   | R2-score (coefficient of determination) with respect to some data set Y_data
   """
   # sets up the model design matrix
-  def __init__(self, F):
-    self.F   = F
-    self.run = False
+  def __init__(self, F, name):
+    self.F    = F
+    self.name = name
+    self.run  = False
+    self.MSE  = None
+    self.R2   = None
 
   # perform regression
   def regress(self, X_data, Y_data, method, alpha):
@@ -162,11 +176,17 @@ class RegressionModel():
       return self.R2
     else: return 0
   
+  # save results to NumPy array
+  def NumPy_save(self, dirpath, method, technique, alpha,resampled=False):
+    if self.run:
+      if not resampled:
+        path   = dirpath + "{:s}_{:s}".format(method,self.name)
+        MSE,R2 = self.MSE,self.R2
+      else:
+        path   = dirpath + "{:s}_{:s}_{:s}".format(method,self.name,technique)
+        MSE,R2 = self.MSE_sample,self.R2_sample
+      np.save(path,[np.array([MSE,R2,alpha]),self.beta,self.std_beta])
   
-
-
-
-
 if __name__ == "__main__":
   import matplotlib.pyplot as plt
   # real curve and polynomial approximation maps
