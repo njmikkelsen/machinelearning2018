@@ -2,6 +2,7 @@ import sys,os,shutil
 import numpy as np
 import numpy.linalg as la
 import numpy.random as rand
+from sklearn.linear_model import lars_path
 
 class LinearRegression():
   """
@@ -39,16 +40,17 @@ class LinearRegression():
     resampling | bool that indicates whether to employ resampling techniques
   """
   # initial setup
-  def __init__(self,X,Y,foldername=None):
+  def __init__(self,X,Y,foldername=None,save=False):
     # setup folder system
-    if not os.path.isdir("./results"): os.mkdir("./results")
-    if foldername is None:
-          self.dirpath = "./results/{:d}".format(len([sub[0] for sub in os.walk("./results")]))
-    else: self.dirpath = "./results/"+str(foldername)
-    if os.path.isdir(self.dirpath):
-      duplicate     = sum([self.dirpath[10:] in subdir for subdir in [k[0][10:] for k in os.walk("./results/")]])
-      self.dirpath += "{:d}".format(duplicate+1)
-    os.mkdir(self.dirpath); self.dirpath += '/'
+    if save:
+      if not os.path.isdir("./results"): os.mkdir("./results")
+      if foldername is None:
+            self.dirpath = "./results/{:d}".format(len([sub[0] for sub in os.walk("./results")]))
+      else: self.dirpath = "./results/"+str(foldername)
+      if os.path.isdir(self.dirpath):
+        duplicate     = sum([self.dirpath[10:] in subdir for subdir in [k[0][10:] for k in os.walk("./results/")]])
+        self.dirpath += "{:d}".format(duplicate+1)
+      os.mkdir(self.dirpath); self.dirpath += '/'
     # setup regression
     self.X_input    = X if len(X.shape) == 2 else X[:,None]
     self.Y_output   = Y if len(Y.shape) == 2 else Y[:,None]
@@ -58,6 +60,7 @@ class LinearRegression():
     self.method     = "OLS"
     self.technique  = ""
     self.resampling = False
+    self.save       = save
   
   # add a model to the analysis
   def add_model(self, F, name=None):
@@ -108,7 +111,7 @@ class LinearRegression():
           R2_sample  += self.model[key].R2
           l          += 1.
         self.model[key].MSE_sample, self.model[key].R2_sample = MSE_sample/l, R2_sample/l
-      self.model[key].NumPy_save(self.dirpath,self.method,self.technique,alpha,self.resampling)
+      if self.save: self.model[key].NumPy_save(self.dirpath,self.method,self.technique,alpha,self.resampling)
 
 # user-defined regression models
 class RegressionModel():
@@ -136,12 +139,11 @@ class RegressionModel():
 
   # perform regression
   def regress(self, X_data, Y_data, method, alpha):
-    design_matrix = self.F(X_data)
-    # Singular Value Decomposition
-    U,d,VT = la.svd(design_matrix,full_matrices=False)
-    V      = VT.T
-    # compute regression coefficients
+    X = self.F(X_data)
+    # Ordinary Least Squares and Ridge Regression
     if method in ["OLS","Ridge"]:
+      U,d,VT = la.svd(X,full_matrices=False)
+      V      = VT.T
       sigma2 = np.sum(np.square(Y_data-self(X_data)))/(Y_data.shape[0]-X_data.shape[1])
       if method == "OLS":
         self.beta     = V@np.diag(1/d)@U.T@Y_data
@@ -149,7 +151,12 @@ class RegressionModel():
       if method == "Ridge":
         self.beta     = V@np.diag(d/(d**2+alpha))@U.T@Y_data
         self.std_beta = np.sqrt(np.diag(V)*np.power(1+alpha/d**2,-2)*np.diag(VT)*sigma2)[:,None]
-    elif method == "Lasso": pass
+    # Lasso Regression
+    elif method == "Lasso":
+      alphas,_,Beta = lars_path(X,Y_data.flatten(),method="lasso")
+      i             = np.where(alphas>alpha)[0][-1]
+      self.beta     = Beta[:,i]
+      self.std_beta = np.empty(self.beta.shape)
     self.run = True
     
   # compute model prediction
@@ -180,10 +187,10 @@ class RegressionModel():
   def NumPy_save(self, dirpath, method, technique, alpha,resampled=False):
     if self.run:
       if not resampled:
-        path   = dirpath + "{:s}_{:s}".format(method,self.name)
+        path   = dirpath + "{:s}_{:s}".format(str(method),str(self.name))
         MSE,R2 = self.MSE,self.R2
       else:
-        path   = dirpath + "{:s}_{:s}_{:s}".format(method,self.name,technique)
+        path   = dirpath + "{:s}_{:s}_{:s}".format(str(method),str(self.name),str(technique))
         MSE,R2 = self.MSE_sample,self.R2_sample
       np.save(path,[np.array([MSE,R2,alpha]),self.beta,self.std_beta])
   

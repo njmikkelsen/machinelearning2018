@@ -74,7 +74,7 @@ def plot_surfaces(X,Y,surf_Franke,surf_model,dirpath,deg):
   ax2.set_ylabel("y",fontsize=20)
 
   plt.tight_layout()
-  plt.savefig(dirpath+"surf_plot_deg{:d}.png".format(deg))
+#  plt.savefig(dirpath+"surf_plot_deg{:d}.png".format(deg))
   plt.show()
 
 def plot_difference(X,Y,surf_Franke,surf_model,dirpath,deg):
@@ -89,7 +89,7 @@ def plot_difference(X,Y,surf_Franke,surf_model,dirpath,deg):
                "and a {:s} order polynomial approximation".format(ordinal(deg)),fontsize=22)
   ax.set_xlabel("x",fontsize=20)
   ax.set_ylabel("y",fontsize=20)
-  plt.savefig(dirpath+"diff_plot_deg{:d}.png".format(deg))
+#  plt.savefig(dirpath+"diff_plot_deg{:d}.png".format(deg))
   plt.show()
 
 
