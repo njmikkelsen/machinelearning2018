@@ -118,6 +118,7 @@ class LinearRegression():
         self.model[key].MSE_sample, self.model[key].R2_sample = MSE_sample/l, R2_sample/l
       if self.save: self.model[key].NumPy_save(self.dirpath,self.method,self.technique,alpha,self.resampling)
 
+
 # user-defined regression models
 class RegressionModel():
   """

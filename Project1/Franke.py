@@ -14,10 +14,12 @@ sigma  = 0.0   # standard deviation of noise
 deg    = 5     # polynomial degree
 name   = "poly_deg{:d}".format(deg)
 
-A = FrankeApproximation(N,sigma,x0,x1,y0,y1)
+
+A = Franke_PolynomialApproximation(N,sigma,x0,x1,y0,y1)
+A.add_polynomial(5)
 A()
 A.plot_exact()
 A.plot_model()
-A.plot_diff()
+
 
 
