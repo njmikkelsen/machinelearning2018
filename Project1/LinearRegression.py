@@ -51,6 +51,7 @@ class LinearRegression():
         duplicate     = sum([self.dirpath[10:] in subdir for subdir in [k[0][10:] for k in os.walk("./results/")]])
         self.dirpath += "{:d}".format(duplicate+1)
       os.mkdir(self.dirpath); self.dirpath += '/'
+    else: self.dirpath = "./"
     # setup regression
     self.X_input    = X if len(X.shape) == 2 else X[:,None]
     self.Y_output   = Y if len(Y.shape) == 2 else Y[:,None]
@@ -69,6 +70,10 @@ class LinearRegression():
       print("Model name '{:s}' is unavailable.".format(name))
       sys.exit(1)
     self.model[name] = RegressionModel(F,name)
+  
+  # remove a model from the analysis
+  def remove_model(self,name):
+    if name in self.model.keys(): del self.model[name]
   
   # select regression method
   def use_method(self, method):
@@ -193,50 +198,5 @@ class RegressionModel():
         path   = dirpath + "{:s}_{:s}_{:s}".format(str(method),str(self.name),str(technique))
         MSE,R2 = self.MSE_sample,self.R2_sample
       np.save(path,[np.array([MSE,R2,alpha]),self.beta,self.std_beta])
-  
-if __name__ == "__main__":
-  import matplotlib.pyplot as plt
-  # real curve and polynomial approximation maps
-  f  = lambda x: np.exp(-x**2)
-  def f1(X):
-    x = X.flatten()
-    return np.array([np.ones(len(x)),np.exp(-x**2)]).T
-  def f2(X):
-    x = X.flatten()
-    return np.array([np.ones(len(x)),x**2,x**4,x**6]).T
-  # data set
-  x        = np.linspace(-2,2,15)
-  x_smooth = np.linspace(x.min(),x.max(),1000)
-  y        = f(x) + 0.1*rand.randn(len(x))
-  # initialise regression
-  LinReg = LinearRegression(x,y)
-  LinReg.add_model(F=f1,name="f1")
-  LinReg.add_model(F=f2,name="f2")
-  # perform analysis
-  LinReg.use_method("Ridge")
-  LinReg.run_analysis(alpha=1)
-  F1,F2 = [LinReg.model[key] for key in ["f1","f2"]]
-  LinReg.setup_resampling("Bootstrap",K=100)
-  LinReg.run_analysis(alpha=1)
-  # plot results
-  plt.plot(x_smooth,f(x_smooth),label="underlying curve")
-  plt.scatter(x,y,label="data points")
-  plt.plot(x_smooth,F1(x_smooth),label="f1")
-  plt.plot(x_smooth,F2(x_smooth),label="f2")
-  plt.legend(loc="best")
-  plt.show()
-  # print results
-  for m,F in zip(["f1","f2"],[F1,F2]):
-    print("\n")
-    print("model {:s}:".format(m))
-    print("  sampled MSE = {:f}".format(LinReg.model[m].MSE_sample))
-    print("  sampled R2  = {:f}".format(LinReg.model[m].R2_sample))
-    print("  beta:")
-    print(F.beta)
-    print("  std(beta):")
-    print(F.std_beta)
-    print("  std(beta)/beta:")
-    print(F.std_beta/F.beta)
-  
-  
-  
+
+
