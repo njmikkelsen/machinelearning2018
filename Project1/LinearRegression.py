@@ -36,8 +36,9 @@ class LinearRegression():
     N          | number of data points
     p          | number of input vectors
     model      | dictionary containing all the user-defined models
-    method     | regression method used
-    resampling | bool that indicates whether to employ resampling techniques
+    method     | current regression method
+    save       | indicates whether to write results to file
+    dirpath    | path to directory where data is stored in case save=True
   """
   # initial setup
   def __init__(self,X,Y,foldername=None,save=False):
@@ -59,8 +60,6 @@ class LinearRegression():
     self.p          = int(len(X.T))
     self.model      = {}
     self.method     = "OLS"
-    self.technique  = ""
-    self.resampling = False
     self.save       = save
   
   # add a model to the analysis
@@ -81,43 +80,49 @@ class LinearRegression():
       self.method = method
     else: print("Invalid method, continuing with '{:s}'.".format(self.method))
   
-  # setup data resampling
-  def setup_resampling(self, technique,K=1):
-    if technique in ["Kfold","Bootstrap"]:
-      self.resampling = True
-      self.technique  = technique
-      self.K          = K  # Kfold: #samples. Bootstrap: #iterations
-  
   # perform regression analysis
-  def run_analysis(self, alpha=0):
+  def run_analysis(self, alpha=0, technique="", K=1):
     for key in self.model.keys():
-      # regression without resampling
-      if not self.resampling:
+      if not(technique in ["Bootstrap","Kfold"]):
         self.model[key].regress(self.X_input, self.Y_output,self.method,alpha)
         self.model[key].compute_R2(self.X_input,self.Y_output)
-      # regression with resampling
-      if self.resampling:
-        l, MSE_sample, R2_sample = 0, 0, 0
-        if self.technique == "Bootstrap": X_test,Y_test,s = self.X_input,self.Y_output,np.size(self.Y_output)
-        for k in range(self.K):
-          if   self.technique == "Kfold":
-            K       = k*self.K
-            X_test  = self.X_input [K:K+self.K,:]
-            Y_test  = self.Y_output[K:K+self.K,:]
-            X_train = np.concatenate((self.X_input [:K,:],self.X_input [K+self.K:,:]))
-            Y_train = np.concatenate((self.Y_output[:K,:],self.Y_output[K+self.K:,:]))
-          elif self.technique == "Bootstrap":
+      else:
+        # preparation
+        l, MSE_sample, R2_sample, Bias_sample, Var_sample = 0, 0, 0, 0, 0
+        if technique == "Bootstrap": X_test,Y_test,s = self.X_input,self.Y_output,np.size(self.Y_output)
+        # resampling algorithm
+        for k in range(K):
+          # divided data into Training and Testing sets
+          if   technique == "Kfold":
+            K_      = k*K
+            X_test  = self.X_input [K_:K_+K,:]
+            Y_test  = self.Y_output[K_:K_+K,:]
+            X_train = np.concatenate((self.X_input [:K_,:],self.X_input [K_+K:,:]))
+            Y_train = np.concatenate((self.Y_output[:K_,:],self.Y_output[K_+K:,:]))
+          elif technique == "Bootstrap":
             index   = rand.randint(s,size=s)
             X_train = self.X_input [index,:]
             Y_train = self.Y_output[index,:]
+          # perform regression analyis
           self.model[key].regress(X_train,Y_train,self.method,alpha)
           self.model[key].compute_R2(X_test,Y_test)
-          MSE_sample += self.model[key].MSE
-          R2_sample  += self.model[key].R2
-          l          += 1.
-        self.model[key].MSE_sample, self.model[key].R2_sample = MSE_sample/l, R2_sample/l
-      if self.save: self.model[key].NumPy_save(self.dirpath,self.method,self.technique,alpha,self.resampling)
-
+          MSE_sample  += self.model[key].MSE
+          R2_sample   += self.model[key].R2
+          Y_pred       = self.model[key](X_test)
+          Bias_sample += np.mean(Y_test-Y_pred)
+          Var_sample  += np.var(Y_pred)
+          l           += 1.
+        # Adjust final resampled quantities
+        self.model[key].MSE_sample  = MSE_sample/l
+        self.model[key].R2_sample   = R2_sample/l
+        self.model[key].Bias_sample = Bias_sample/l
+        self.model[key].Var_sample  = Var_sample/l
+        # use the beta parameters from a non-resampled run
+        self.save = False
+        self.run_analysis(alpha)
+        self.save = True
+      # save results to NumPy file
+      if self.save: self.model[key].NumPy_save(self.dirpath,self.method,alpha,technique,K)
 
 # user-defined regression models
 class RegressionModel():
@@ -125,23 +130,28 @@ class RegressionModel():
   Regression Map
   
   Support class for the LinearRegression class. Contains the model-specific data that
-  is independent of other models.
+  is independent of other regression models.
   
-  Attributes:
-    F    | model map (defines the model)
-    X    | model design matrix
-    beta | model coefficients with respect to some data set Y_data
-    run  | bool that indicates whether the model coefficients have been determined
-    MSE  | Mean Squared Error with respect to some data set Y_data
-    R2   | R2-score (coefficient of determination) with respect to some data set Y_data
+  Constant attributes:
+    F    | function map for the regression model, see LinearRegression() for details
+    name | name of the model (used when writing to file)
+  
+  Variable attributes: (depends on the last usage of the attribute)
+    run         | indicates whether a regression analysis as been performed
+    beta        | column vector with model parameters
+    std_beta    | column vector with standard deviation of model parameters
+    MSE         | Mean Squared Error:                     E[(y-y_pred)^2]
+    R2          | Coefficient of Determination:           1-MSE/E[(y-E[y])^2]
+    MSE_sample  | Average Mean Squared Error:             E[MSE]
+    R2_sample   | Average Coefficient of Determination:   E[R2]
+    Bias_sample | Estimated Bias^2:                       E[(y-y_pred)]
+    Var_sample  | Estimated Variance:                     Var(y_pred)
   """
   # sets up the model design matrix
   def __init__(self, F, name):
     self.F    = F
     self.name = name
     self.run  = False
-    self.MSE  = None
-    self.R2   = None
 
   # perform regression
   def regress(self, X_data, Y_data, method, alpha):
@@ -190,14 +200,13 @@ class RegressionModel():
     else: return 0
   
   # save results to NumPy array
-  def NumPy_save(self, dirpath, method, technique, alpha,resampled=False):
+  def NumPy_save(self, dirpath, method, alpha, technique, K):
     if self.run:
-      if not resampled:
+      if technique == "":
         path   = dirpath + "{:s}_{:s}".format(str(method),str(self.name))
-        MSE,R2 = self.MSE,self.R2
+        np.save(path,[np.array([self.MSE,self.R2,alpha]),self.beta,self.std_beta])
       else:
-        path   = dirpath + "{:s}_{:s}_{:s}".format(str(method),str(self.name),str(technique))
-        MSE,R2 = self.MSE_sample,self.R2_sample
-      np.save(path,[np.array([MSE,R2,alpha]),self.beta,self.std_beta])
-
+        path = dirpath + "{:s}_{:s}_{:s}{:s}".format(str(method),str(self.name),str(technique),str(K))
+        np.save(path,[np.array([self.MSE_sample,self.R2_sample,alpha,self.Bias_sample,self.Var_sample]),
+                      self.beta,self.std_beta])
 

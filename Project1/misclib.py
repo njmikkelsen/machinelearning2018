@@ -1,4 +1,5 @@
 import itertools
+from imageio import imread
 import numpy as np, numpy.random as rand
 import matplotlib.pyplot as plt
 from matplotlib import cm
@@ -56,12 +57,11 @@ class ScalarField_PolynomialApproximation():
   # run regression analysis
   def determine_coefficients(self,method,alpha,technique,K):
     self.LinReg.use_method(method)
-    self.LinReg.setup_resampling(technique,K)
-    self.LinReg.run_analysis(alpha)
+    self.LinReg.run_analysis(alpha,technique,K)
     for deg in self.P:
       idx = len(self.data[method][deg].keys())
       model = self.LinReg.model[deg]
-      self.data[method][deg][idx] = [model.MSE,model.R2,model.beta]
+      self.data[method][deg][idx] = [alpha,model.MSE,model.R2,model.beta]
   
   # add polynomial(s) to the analysis
   def add_polynomial(self, deg):
@@ -79,12 +79,13 @@ class ScalarField_PolynomialApproximation():
         if d in self.P: self.P.remove(d)
     else:
       if deg in self.P: self.P.remove(deg)
+  
 
 class Surface_PolynomialApproximation(ScalarField_PolynomialApproximation):
   """
   Polynomial approximation of a surface z = f(x,y).
-  This is an expansion of the regular ScalarField_PolynomialApproximation class whose
-  primary function is as a plotting tool.
+  This is an expansion of the regular ScalarField_PolynomialApproximation class
+  whose primary function is plotting capabilities.
   """
       
   @staticmethod
@@ -98,10 +99,10 @@ class Surface_PolynomialApproximation(ScalarField_PolynomialApproximation):
   
   # build surface for plot_model() and plot_contour()
   def build_surface(self,X,Y,method,deg,idx):
-    beta   = self.data[method][deg][idx][2]
+    beta   = self.data[method][deg][idx][3]
     z      = lambda x,y: self.design_matrix(np.array([x,y]).T,deg)
     surf,x = np.zeros(X.shape),X[0]
-    for i in range(len(x)):
+    for i in range(X.shape[0]):
       surf[i] = (z(x,Y[i,:])@beta).flatten()
     return surf
   
@@ -111,7 +112,7 @@ class Surface_PolynomialApproximation(ScalarField_PolynomialApproximation):
     fig = plt.figure(figsize=(14,8))
     ax  = fig.add_subplot(111,projection="3d")
     ax.plot_surface(X,Y,surf,cmap=cm.Spectral_r,lw=0)
-    ax.set_title(title,fontsize=22)
+    ax.set_title(title,fontsize=20)
     ax.set_xlabel("x",fontsize=20)
     ax.set_ylabel("y",fontsize=20)
     ax.set_zlabel("z",fontsize=20)
@@ -122,10 +123,10 @@ class Surface_PolynomialApproximation(ScalarField_PolynomialApproximation):
   @staticmethod
   def plot_contour(X,Y,contour,title,fig_name,dirpath):
     fig  = plt.figure(figsize=(15,8))
-    ax   = fig.add_subplot(111,projection="3d")
+    ax   = fig.add_subplot(111)
     cont = ax.contourf(X,Y,contour,60,cmap=cm.jet)
     plt.colorbar(cont)
-    ax.set_title(title,fontsize=22)
+    ax.set_title(title,fontsize=20)
     ax.set_xlabel("x",fontsize=20)
     ax.set_ylabel("y",fontsize=20)
     plt.savefig(dirpath+"{:s}.png".format(fig_name))
@@ -166,24 +167,66 @@ class Franke_PolynomialApproximation(Surface_PolynomialApproximation):
   
   # plot the exact Franke surface
   def plot_exact(self):
-    title = "Surface Plot of Franke's Function"
-    self.plot_surface(self.X,self.Y,self.F,title,"exact_surface",self.LinReg.dirpath)
+    self.plot_surface(self.X,self.Y,self.F,"Surface Plot of Franke's Function","exact_surface",self.LinReg.dirpath)
   
   # surface plot approximated Franke surface
   def plot_model(self,method="OLS",deg=None,idx=0):
-    if deg is None: deg = sorted([key for key in self.data[method].keys()])[0]
-    surf  = self.build_surface(self.X,self.Y,method,deg,idx)
-    extra = "" if method == "OLS" else r" Using $\lambda =$ " + str(penalty)
-    title = "Surface Plot of {:s} Degree Polynomal Approximation of Franke's Function\n".format(self.ordinal(deg)) + \
-            "With Coefficients Determined by {:s} Regression{:s}".format(method,extra)
+    deg, title, surf = self.prepare_plot(method,deg,idx,"model")
     self.plot_surface(self.X,self.Y,surf,title,"surface_deg{:d}_{:s}".format(deg,method),self.LinReg.dirpath)
 
   # contour plot difference of approximated and exact Franke surface
   def plot_diff(self,method="OLS",deg=None,idx=0):
+    deg, title, surf = self.prepare_plot(method,deg,idx,"diff")
+    self.plot_contour(self.X,self.Y,surf-self.F,title,"diff_deg{:d}_{:s}".format(deg,method),self.LinReg.dirpath)
+
+  # prepare for plot
+  def prepare_plot(self,method,deg,idx,plot_type):
     if deg is None: deg = sorted([key for key in self.data[method].keys()])[0]
-    surf  = self.build_surface(self.X,self.Y,method,deg,idx)
-    extra = "" if method == "OLS" else r" Using $\lambda =$ " + str(penalty)
-    title = "Contour Plot of Difference Between {:s} Degree Polynomal Approximation".format(self.ordinal(deg)) + \
-            "and Franke's Function\nWith Coefficients Determined by {:s} Regression{:s}".format(method,extra)
-    self.plot_surface(self.X,self.Y,self.F-surf,title,"diff_deg{:d}_{:s}".format(deg,method),self.LinReg.dirpath)
+    penalty = self.data[method][deg][0]
+    surf    = self.build_surface(self.X,self.Y,method,deg,idx)
+    extra   = "" if method == "OLS" else r" Using $\lambda =$ " + str(penalty)
+    title_  = ["Surface Plot of ","of"] if plot_type=="model" else ["Difference Between ","and"]
+    title   = title_[0]+"{:s} Degree Polynomial Approximation ".format(self.ordinal(deg))+title_[1]+" Franke's Function\n" + \
+              "With Coefficients Determined by {:s} Regresion{:s}".format(method,extra)
+    surf    = self.build_surface(self.X,self.Y,method,deg,idx)
+    return deg, title, surf
+
+class Terrain_PolynomialApproximation(Surface_PolynomialApproximation):
+  """
+  Polynomial approximation of three-dimensional terrain-data stored in .tif files.
+  The data is a surface z = f(x,y).
+  """
+  def __init__(self,filepath,nx=1,ny=1):
+    self.filepath,terrain        = filepath,imread(filepath)
+    self.terrain                 = np.asarray(terrain)[::ny,::nx]
+    self.X,self.Y                = np.meshgrid(np.linspace(0,1,self.terrain.shape[1]),np.linspace(0,1,self.terrain.shape[0]))
+    self.x,self.y,self.f         = [a.flatten() for a in [self.X,self.Y,self.terrain]]
+    super().__init__(np.array([self.x,self.y]).T,self.f,"TerrainApprox")
+  
+  # plot terrain data
+  def plot_terrain(self,contour=True,surface=False):
+    if contour: self.plot_contour(self.X,self.Y,self.terrain,"Contour Plot of Terrain Data","terrain_contour",self.LinReg.dirpath)
+    if surface: self.plot_surface(self.X,self.Y,self.terrain,"Surface Plot of Terrain Data","terrain_surface",self.LinReg.dirpath)
+   
+  # surface plot polynomial model
+  def plot_model(self,method="OLS",deg=None,idx=0):
+    deg, title, surf = self.prepare_plot(method,deg,idx,"model")
+    self.plot_surface(self.X,self.Y,surf,title,"surface_deg{:d}_{:s}".format(deg,method),self.LinReg.dirpath)
+  
+  # contour plot difference between polynomial model and terrain data
+  def plot_diff(self,method="OLS",deg=None,idx=0):
+    deg, title, surf = self.prepare_plot(method,deg,idx,"diff")
+    self.plot_contour(self.X,self.Y,surf-self.terrain,title,"diff_deg{:d}_{:s}".format(deg,method),self.LinReg.dirpath)
+  
+  # prepare for plot
+  def prepare_plot(self,method,deg,idx,plot_type):
+    if deg is None: deg = sorted([key for key in self.data[method].keys()])[0]
+    penalty = self.data[method][deg][0]
+    extra   = "" if method == "OLS" else r" Using $\lambda =$ " + str(penalty)
+    title_  = ["Surface Plot of ","of"] if plot_type=="model" else ["Difference Between ","and"]
+    title   = title_[0]+"{:s} Degree Polynomial Approximation ".format(self.ordinal(deg))+title_[1]+" Terrain Data\n" + \
+              "With Coefficients Determined by {:s} Regresion{:s}".format(method,extra)
+    surf    = self.build_surface(self.X,self.Y,method,deg,idx)
+    return deg, title, surf
+
     

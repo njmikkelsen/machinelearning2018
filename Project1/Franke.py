@@ -4,8 +4,8 @@ from LinearRegression import *
 from misclib import *
 
 # Franke parameters
-N      = 800   # number of data points
-N_surf = 400   # number of surface grid points
+N      = 600   # number of data points
+N_surf = 200   # number of surface grid points
 x0     = 0     # minimum x value
 x1     = 1     # maximum x value
 y0     = 0     # minimum y value
@@ -17,8 +17,7 @@ name   = "poly_deg{:d}".format(deg)
 
 A = Franke_PolynomialApproximation(N,sigma,x0,x1,y0,y1)
 A.add_polynomial(5)
-A()
-A.plot_exact()
+A(technique="Kfold",K=10)
 A.plot_model()
 
 
