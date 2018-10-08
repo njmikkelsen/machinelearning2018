@@ -1,0 +1,2036 @@
+Polynomial Parametrisation of Franke's Function Using Linear Regression
+
+Franke Parameters:
+  number of data points          = 400
+  minimim x value                = +0.000000e+00
+  maximum x value                = +1.000000e+00
+  minimum y value                = +0.000000e+00
+  maximum y value                = +1.000000e+00
+  standard deviation of noise    = +0.000000e+00
+
+Regression parameters:
+  polynomial degree              = 5
+  number of penalty parameters   = +1.000000e+02
+  minimum penalty                = +1.000000e-09
+  maximum penalty                = +5.000000e-02
+  number of Bootstrap iterations = 200
+
+----------------------------------------------------------------------
+Ordinary Least Squares:
+
+  MSE             = +1.485395e-03
+  R2              = +9.811110e-01
+  sum(std_beta^2) = +4.099404e+00
+  using Bootstrap with K = 200:
+    avg(MSE) = +1.637429e-03
+    avg(R2)  = +9.791776e-01
+    Bias     = +7.864245e-02
+    Variance = +7.738994e-02
+
+----------------------------------------------------------------------
+Ridge Regression:
+
+  penalty         = +1.000000e-09
+  MSE             = +1.485395e-03
+  R2              = +9.811110e-01
+  sum(std_beta^2) = +1.595149e-01
+  using Bootstrap with K = 200:
+    avg(MSE) = +1.624456e-03
+    avg(R2)  = +9.793426e-01
+    Bias     = +7.864234e-02
+    Variance = +7.717701e-02
+
+  penalty         = +5.050515e-04
+  MSE             = +2.678213e-03
+  R2              = +9.659425e-01
+  sum(std_beta^2) = +1.753287e-01
+  using Bootstrap with K = 200:
+    avg(MSE) = +2.812718e-03
+    avg(R2)  = +9.642321e-01
+    Bias     = +7.864466e-02
+    Variance = +7.509159e-02
+
+  penalty         = +1.010102e-03
+  MSE             = +3.028714e-03
+  R2              = +9.614853e-01
+  sum(std_beta^2) = +1.724747e-01
+  using Bootstrap with K = 200:
+    avg(MSE) = +3.144683e-03
+    avg(R2)  = +9.600106e-01
+    Bias     = +7.864760e-02
+    Variance = +7.419979e-02
+
+  penalty         = +1.515152e-03
+  MSE             = +3.269558e-03
+  R2              = +9.584227e-01
+  sum(std_beta^2) = +1.784815e-01
+  using Bootstrap with K = 200:
+    avg(MSE) = +3.387497e-03
+    avg(R2)  = +9.569229e-01
+    Bias     = +7.864657e-02
+    Variance = +7.366289e-02
+
+  penalty         = +2.020203e-03
+  MSE             = +3.474643e-03
+  R2              = +9.558147e-01
+  sum(std_beta^2) = +1.823520e-01
+  using Bootstrap with K = 200:
+    avg(MSE) = +3.598847e-03
+    avg(R2)  = +9.542353e-01
+    Bias     = +7.864544e-02
+    Variance = +7.324008e-02
+
+  penalty         = +2.525253e-03
+  MSE             = +3.660043e-03
+  R2              = +9.534570e-01
+  sum(std_beta^2) = +1.836925e-01
+  using Bootstrap with K = 200:
+    avg(MSE) = +3.772434e-03
+    avg(R2)  = +9.520278e-01
+    Bias     = +7.864799e-02
+    Variance = +7.294241e-02
+
+  penalty         = +3.030304e-03
+  MSE             = +3.830718e-03
+  R2              = +9.512867e-01
+  sum(std_beta^2) = +1.775222e-01
+  using Bootstrap with K = 200:
+    avg(MSE) = +3.988259e-03
+    avg(R2)  = +9.492833e-01
+    Bias     = +7.864713e-02
+    Variance = +7.264948e-02
+
+  penalty         = +3.535354e-03
+  MSE             = +3.988801e-03
+  R2              = +9.492764e-01
+  sum(std_beta^2) = +1.829772e-01
+  using Bootstrap with K = 200:
+    avg(MSE) = +4.124553e-03
+    avg(R2)  = +9.475501e-01
+    Bias     = +7.864831e-02
+    Variance = +7.250616e-02
+
+  penalty         = +4.040405e-03
+  MSE             = +4.135590e-03
+  R2              = +9.474097e-01
+  sum(std_beta^2) = +1.787065e-01
+  using Bootstrap with K = 200:
+    avg(MSE) = +4.263060e-03
+    avg(R2)  = +9.457888e-01
+    Bias     = +7.864755e-02
+    Variance = +7.284630e-02
+
+  penalty         = +4.545455e-03
+  MSE             = +4.272099e-03
+  R2              = +9.456738e-01
+  sum(std_beta^2) = +1.826970e-01
+  using Bootstrap with K = 200:
+    avg(MSE) = +4.397324e-03
+    avg(R2)  = +9.440814e-01
+    Bias     = +7.864852e-02
+    Variance = +7.230554e-02
+
+  penalty         = +5.050506e-03
+  MSE             = +4.399219e-03
+  R2              = +9.440573e-01
+  sum(std_beta^2) = +1.837386e-01
+  using Bootstrap with K = 200:
+    avg(MSE) = +4.538489e-03
+    avg(R2)  = +9.422863e-01
+    Bias     = +7.865165e-02
+    Variance = +7.211177e-02
+
+  penalty         = +5.555556e-03
+  MSE             = +4.517762e-03
+  R2              = +9.425499e-01
+  sum(std_beta^2) = +1.944684e-01
+  using Bootstrap with K = 200:
+    avg(MSE) = +4.663185e-03
+    avg(R2)  = +9.407006e-01
+    Bias     = +7.864955e-02
+    Variance = +7.211745e-02
+
+  penalty         = +6.060607e-03
+  MSE             = +4.628471e-03
+  R2              = +9.411420e-01
+  sum(std_beta^2) = +1.852079e-01
+  using Bootstrap with K = 200:
+    avg(MSE) = +4.783948e-03
+    avg(R2)  = +9.391649e-01
+    Bias     = +7.865067e-02
+    Variance = +7.195610e-02
+
+  penalty         = +6.565657e-03
+  MSE             = +4.732029e-03
+  R2              = +9.398251e-01
+  sum(std_beta^2) = +1.882483e-01
+  using Bootstrap with K = 200:
+    avg(MSE) = +4.873783e-03
+    avg(R2)  = +9.380225e-01
+    Bias     = +7.865046e-02
+    Variance = +7.198246e-02
+
+  penalty         = +7.070708e-03
+  MSE             = +4.829058e-03
+  R2              = +9.385913e-01
+  sum(std_beta^2) = +1.915445e-01
+  using Bootstrap with K = 200:
+    avg(MSE) = +4.957368e-03
+    avg(R2)  = +9.369596e-01
+    Bias     = +7.865013e-02
+    Variance = +7.188875e-02
+
+  penalty         = +7.575758e-03
+  MSE             = +4.920121e-03
+  R2              = +9.374333e-01
+  sum(std_beta^2) = +1.886836e-01
+  using Bootstrap with K = 200:
+    avg(MSE) = +5.055490e-03
+    avg(R2)  = +9.357118e-01
+    Bias     = +7.864942e-02
+    Variance = +7.196488e-02
+
+  penalty         = +8.080809e-03
+  MSE             = +5.005728e-03
+  R2              = +9.363446e-01
+  sum(std_beta^2) = +1.866282e-01
+  using Bootstrap with K = 200:
+    avg(MSE) = +5.169033e-03
+    avg(R2)  = +9.342680e-01
+    Bias     = +7.864910e-02
+    Variance = +7.146127e-02
+
+  penalty         = +8.585859e-03
+  MSE             = +5.086340e-03
+  R2              = +9.353195e-01
+  sum(std_beta^2) = +1.896489e-01
+  using Bootstrap with K = 200:
+    avg(MSE) = +5.235240e-03
+    avg(R2)  = +9.334260e-01
+    Bias     = +7.865138e-02
+    Variance = +7.148254e-02
+
+  penalty         = +9.090910e-03
+  MSE             = +5.162372e-03
+  R2              = +9.343527e-01
+  sum(std_beta^2) = +1.861448e-01
+  using Bootstrap with K = 200:
+    avg(MSE) = +5.333266e-03
+    avg(R2)  = +9.321795e-01
+    Bias     = +7.865436e-02
+    Variance = +7.153412e-02
+
+  penalty         = +9.595960e-03
+  MSE             = +5.234198e-03
+  R2              = +9.334393e-01
+  sum(std_beta^2) = +1.856305e-01
+  using Bootstrap with K = 200:
+    avg(MSE) = +5.364908e-03
+    avg(R2)  = +9.317771e-01
+    Bias     = +7.864900e-02
+    Variance = +7.165270e-02
+
+  penalty         = +1.010101e-02
+  MSE             = +5.302155e-03
+  R2              = +9.325751e-01
+  sum(std_beta^2) = +1.875136e-01
+  using Bootstrap with K = 200:
+    avg(MSE) = +5.445108e-03
+    avg(R2)  = +9.307573e-01
+    Bias     = +7.865386e-02
+    Variance = +7.133661e-02
+
+  penalty         = +1.060606e-02
+  MSE             = +5.366550e-03
+  R2              = +9.317562e-01
+  sum(std_beta^2) = +1.900741e-01
+  using Bootstrap with K = 200:
+    avg(MSE) = +5.519204e-03
+    avg(R2)  = +9.298150e-01
+    Bias     = +7.865323e-02
+    Variance = +7.094316e-02
+
+  penalty         = +1.111111e-02
+  MSE             = +5.427656e-03
+  R2              = +9.309792e-01
+  sum(std_beta^2) = +1.881998e-01
+  using Bootstrap with K = 200:
+    avg(MSE) = +5.600563e-03
+    avg(R2)  = +9.287804e-01
+    Bias     = +7.865202e-02
+    Variance = +7.095385e-02
+
+  penalty         = +1.161616e-02
+  MSE             = +5.485722e-03
+  R2              = +9.302408e-01
+  sum(std_beta^2) = +1.982448e-01
+  using Bootstrap with K = 200:
+    avg(MSE) = +5.645240e-03
+    avg(R2)  = +9.282123e-01
+    Bias     = +7.865294e-02
+    Variance = +7.088140e-02
+
+  penalty         = +1.212121e-02
+  MSE             = +5.540975e-03
+  R2              = +9.295382e-01
+  sum(std_beta^2) = +1.875530e-01
+  using Bootstrap with K = 200:
+    avg(MSE) = +5.692250e-03
+    avg(R2)  = +9.276145e-01
+    Bias     = +7.865450e-02
+    Variance = +7.137256e-02
+
+  penalty         = +1.262626e-02
+  MSE             = +5.593618e-03
+  R2              = +9.288687e-01
+  sum(std_beta^2) = +1.888497e-01
+  using Bootstrap with K = 200:
+    avg(MSE) = +5.751063e-03
+    avg(R2)  = +9.268666e-01
+    Bias     = +7.865199e-02
+    Variance = +7.125818e-02
+
+  penalty         = +1.313131e-02
+  MSE             = +5.643837e-03
+  R2              = +9.282301e-01
+  sum(std_beta^2) = +1.913969e-01
+  using Bootstrap with K = 200:
+    avg(MSE) = +5.779553e-03
+    avg(R2)  = +9.265043e-01
+    Bias     = +7.865118e-02
+    Variance = +7.104942e-02
+
+  penalty         = +1.363636e-02
+  MSE             = +5.691801e-03
+  R2              = +9.276202e-01
+  sum(std_beta^2) = +1.906877e-01
+  using Bootstrap with K = 200:
+    avg(MSE) = +5.856154e-03
+    avg(R2)  = +9.255302e-01
+    Bias     = +7.865554e-02
+    Variance = +7.090507e-02
+
+  penalty         = +1.414141e-02
+  MSE             = +5.737665e-03
+  R2              = +9.270370e-01
+  sum(std_beta^2) = +1.919270e-01
+  using Bootstrap with K = 200:
+    avg(MSE) = +5.896232e-03
+    avg(R2)  = +9.250205e-01
+    Bias     = +7.865295e-02
+    Variance = +7.112040e-02
+
+  penalty         = +1.464647e-02
+  MSE             = +5.781568e-03
+  R2              = +9.264787e-01
+  sum(std_beta^2) = +1.884307e-01
+  using Bootstrap with K = 200:
+    avg(MSE) = +5.945501e-03
+    avg(R2)  = +9.243940e-01
+    Bias     = +7.865377e-02
+    Variance = +7.103895e-02
+
+  penalty         = +1.515152e-02
+  MSE             = +5.823639e-03
+  R2              = +9.259437e-01
+  sum(std_beta^2) = +1.885736e-01
+  using Bootstrap with K = 200:
+    avg(MSE) = +5.983049e-03
+    avg(R2)  = +9.239165e-01
+    Bias     = +7.865101e-02
+    Variance = +7.095183e-02
+
+  penalty         = +1.565657e-02
+  MSE             = +5.863996e-03
+  R2              = +9.254305e-01
+  sum(std_beta^2) = +1.886131e-01
+  using Bootstrap with K = 200:
+    avg(MSE) = +6.004905e-03
+    avg(R2)  = +9.236386e-01
+    Bias     = +7.865340e-02
+    Variance = +7.108938e-02
+
+  penalty         = +1.616162e-02
+  MSE             = +5.902747e-03
+  R2              = +9.249377e-01
+  sum(std_beta^2) = +1.913566e-01
+  using Bootstrap with K = 200:
+    avg(MSE) = +6.054700e-03
+    avg(R2)  = +9.230054e-01
+    Bias     = +7.865260e-02
+    Variance = +7.063718e-02
+
+  penalty         = +1.666667e-02
+  MSE             = +5.939991e-03
+  R2              = +9.244641e-01
+  sum(std_beta^2) = +1.916090e-01
+  using Bootstrap with K = 200:
+    avg(MSE) = +6.109661e-03
+    avg(R2)  = +9.223065e-01
+    Bias     = +7.865544e-02
+    Variance = +7.065988e-02
+
+  penalty         = +1.717172e-02
+  MSE             = +5.975820e-03
+  R2              = +9.240085e-01
+  sum(std_beta^2) = +1.903033e-01
+  using Bootstrap with K = 200:
+    avg(MSE) = +6.124863e-03
+    avg(R2)  = +9.221132e-01
+    Bias     = +7.865212e-02
+    Variance = +7.094838e-02
+
+  penalty         = +1.767677e-02
+  MSE             = +6.010317e-03
+  R2              = +9.235698e-01
+  sum(std_beta^2) = +1.906548e-01
+  using Bootstrap with K = 200:
+    avg(MSE) = +6.175431e-03
+    avg(R2)  = +9.214701e-01
+    Bias     = +7.865565e-02
+    Variance = +7.070135e-02
+
+  penalty         = +1.818182e-02
+  MSE             = +6.043560e-03
+  R2              = +9.231470e-01
+  sum(std_beta^2) = +1.913860e-01
+  using Bootstrap with K = 200:
+    avg(MSE) = +6.204297e-03
+    avg(R2)  = +9.211030e-01
+    Bias     = +7.865505e-02
+    Variance = +7.055321e-02
+
+  penalty         = +1.868687e-02
+  MSE             = +6.075622e-03
+  R2              = +9.227393e-01
+  sum(std_beta^2) = +1.895199e-01
+  using Bootstrap with K = 200:
+    avg(MSE) = +6.218109e-03
+    avg(R2)  = +9.209274e-01
+    Bias     = +7.865286e-02
+    Variance = +7.049655e-02
+
+  penalty         = +1.919192e-02
+  MSE             = +6.106567e-03
+  R2              = +9.223458e-01
+  sum(std_beta^2) = +1.875495e-01
+  using Bootstrap with K = 200:
+    avg(MSE) = +6.278034e-03
+    avg(R2)  = +9.201653e-01
+    Bias     = +7.865418e-02
+    Variance = +7.058821e-02
+
+  penalty         = +1.969697e-02
+  MSE             = +6.136459e-03
+  R2              = +9.219657e-01
+  sum(std_beta^2) = +1.878732e-01
+  using Bootstrap with K = 200:
+    avg(MSE) = +6.289892e-03
+    avg(R2)  = +9.200146e-01
+    Bias     = +7.865457e-02
+    Variance = +7.072030e-02
+
+  penalty         = +2.020202e-02
+  MSE             = +6.165353e-03
+  R2              = +9.215983e-01
+  sum(std_beta^2) = +1.900486e-01
+  using Bootstrap with K = 200:
+    avg(MSE) = +6.306449e-03
+    avg(R2)  = +9.198040e-01
+    Bias     = +7.865407e-02
+    Variance = +7.055633e-02
+
+  penalty         = +2.070707e-02
+  MSE             = +6.193304e-03
+  R2              = +9.212428e-01
+  sum(std_beta^2) = +1.895183e-01
+  using Bootstrap with K = 200:
+    avg(MSE) = +6.351624e-03
+    avg(R2)  = +9.192295e-01
+    Bias     = +7.865428e-02
+    Variance = +7.065042e-02
+
+  penalty         = +2.121212e-02
+  MSE             = +6.220360e-03
+  R2              = +9.208988e-01
+  sum(std_beta^2) = +1.898178e-01
+  using Bootstrap with K = 200:
+    avg(MSE) = +6.373080e-03
+    avg(R2)  = +9.189567e-01
+    Bias     = +7.865479e-02
+    Variance = +7.061788e-02
+
+  penalty         = +2.171717e-02
+  MSE             = +6.246568e-03
+  R2              = +9.205655e-01
+  sum(std_beta^2) = +1.911448e-01
+  using Bootstrap with K = 200:
+    avg(MSE) = +6.393556e-03
+    avg(R2)  = +9.186963e-01
+    Bias     = +7.865471e-02
+    Variance = +7.033487e-02
+
+  penalty         = +2.222222e-02
+  MSE             = +6.271971e-03
+  R2              = +9.202425e-01
+  sum(std_beta^2) = +1.914614e-01
+  using Bootstrap with K = 200:
+    avg(MSE) = +6.430343e-03
+    avg(R2)  = +9.182285e-01
+    Bias     = +7.865362e-02
+    Variance = +7.043363e-02
+
+  penalty         = +2.272727e-02
+  MSE             = +6.296608e-03
+  R2              = +9.199292e-01
+  sum(std_beta^2) = +1.898228e-01
+  using Bootstrap with K = 200:
+    avg(MSE) = +6.438543e-03
+    avg(R2)  = +9.181242e-01
+    Bias     = +7.865214e-02
+    Variance = +7.026338e-02
+
+  penalty         = +2.323232e-02
+  MSE             = +6.320517e-03
+  R2              = +9.196251e-01
+  sum(std_beta^2) = +1.905622e-01
+  using Bootstrap with K = 200:
+    avg(MSE) = +6.481579e-03
+    avg(R2)  = +9.175770e-01
+    Bias     = +7.865485e-02
+    Variance = +7.019377e-02
+
+  penalty         = +2.373737e-02
+  MSE             = +6.343733e-03
+  R2              = +9.193299e-01
+  sum(std_beta^2) = +1.889160e-01
+  using Bootstrap with K = 200:
+    avg(MSE) = +6.497660e-03
+    avg(R2)  = +9.173725e-01
+    Bias     = +7.865675e-02
+    Variance = +7.067000e-02
+
+  penalty         = +2.424242e-02
+  MSE             = +6.366290e-03
+  R2              = +9.190430e-01
+  sum(std_beta^2) = +1.881035e-01
+  using Bootstrap with K = 200:
+    avg(MSE) = +6.527528e-03
+    avg(R2)  = +9.169927e-01
+    Bias     = +7.865836e-02
+    Variance = +7.044954e-02
+
+  penalty         = +2.474748e-02
+  MSE             = +6.388217e-03
+  R2              = +9.187642e-01
+  sum(std_beta^2) = +1.874578e-01
+  using Bootstrap with K = 200:
+    avg(MSE) = +6.549913e-03
+    avg(R2)  = +9.167080e-01
+    Bias     = +7.865461e-02
+    Variance = +7.061013e-02
+
+  penalty         = +2.525253e-02
+  MSE             = +6.409544e-03
+  R2              = +9.184930e-01
+  sum(std_beta^2) = +1.894937e-01
+  using Bootstrap with K = 200:
+    avg(MSE) = +6.569200e-03
+    avg(R2)  = +9.164627e-01
+    Bias     = +7.865565e-02
+    Variance = +6.990237e-02
+
+  penalty         = +2.575758e-02
+  MSE             = +6.430298e-03
+  R2              = +9.182291e-01
+  sum(std_beta^2) = +1.875308e-01
+  using Bootstrap with K = 200:
+    avg(MSE) = +6.580478e-03
+    avg(R2)  = +9.163193e-01
+    Bias     = +7.865158e-02
+    Variance = +7.033344e-02
+
+  penalty         = +2.626263e-02
+  MSE             = +6.450504e-03
+  R2              = +9.179721e-01
+  sum(std_beta^2) = +1.928040e-01
+  using Bootstrap with K = 200:
+    avg(MSE) = +6.594622e-03
+    avg(R2)  = +9.161395e-01
+    Bias     = +7.865456e-02
+    Variance = +7.017156e-02
+
+  penalty         = +2.676768e-02
+  MSE             = +6.470187e-03
+  R2              = +9.177218e-01
+  sum(std_beta^2) = +1.882366e-01
+  using Bootstrap with K = 200:
+    avg(MSE) = +6.624043e-03
+    avg(R2)  = +9.157653e-01
+    Bias     = +7.865356e-02
+    Variance = +7.047224e-02
+
+  penalty         = +2.727273e-02
+  MSE             = +6.489368e-03
+  R2              = +9.174779e-01
+  sum(std_beta^2) = +1.921490e-01
+  using Bootstrap with K = 200:
+    avg(MSE) = +6.637897e-03
+    avg(R2)  = +9.155892e-01
+    Bias     = +7.865379e-02
+    Variance = +7.037251e-02
+
+  penalty         = +2.777778e-02
+  MSE             = +6.508071e-03
+  R2              = +9.172401e-01
+  sum(std_beta^2) = +1.930579e-01
+  using Bootstrap with K = 200:
+    avg(MSE) = +6.682540e-03
+    avg(R2)  = +9.150215e-01
+    Bias     = +7.865352e-02
+    Variance = +7.014769e-02
+
+  penalty         = +2.828283e-02
+  MSE             = +6.526314e-03
+  R2              = +9.170081e-01
+  sum(std_beta^2) = +1.872754e-01
+  using Bootstrap with K = 200:
+    avg(MSE) = +6.675088e-03
+    avg(R2)  = +9.151162e-01
+    Bias     = +7.865564e-02
+    Variance = +7.036288e-02
+
+  penalty         = +2.878788e-02
+  MSE             = +6.544117e-03
+  R2              = +9.167817e-01
+  sum(std_beta^2) = +1.893564e-01
+  using Bootstrap with K = 200:
+    avg(MSE) = +6.697366e-03
+    avg(R2)  = +9.148329e-01
+    Bias     = +7.865621e-02
+    Variance = +7.012036e-02
+
+  penalty         = +2.929293e-02
+  MSE             = +6.561498e-03
+  R2              = +9.165607e-01
+  sum(std_beta^2) = +1.878244e-01
+  using Bootstrap with K = 200:
+    avg(MSE) = +6.722415e-03
+    avg(R2)  = +9.145144e-01
+    Bias     = +7.865505e-02
+    Variance = +7.008691e-02
+
+  penalty         = +2.979798e-02
+  MSE             = +6.578474e-03
+  R2              = +9.163448e-01
+  sum(std_beta^2) = +1.891766e-01
+  using Bootstrap with K = 200:
+    avg(MSE) = +6.742407e-03
+    avg(R2)  = +9.142602e-01
+    Bias     = +7.865669e-02
+    Variance = +6.995129e-02
+
+  penalty         = +3.030303e-02
+  MSE             = +6.595061e-03
+  R2              = +9.161339e-01
+  sum(std_beta^2) = +1.862586e-01
+  using Bootstrap with K = 200:
+    avg(MSE) = +6.741474e-03
+    avg(R2)  = +9.142720e-01
+    Bias     = +7.865101e-02
+    Variance = +6.992714e-02
+
+  penalty         = +3.080808e-02
+  MSE             = +6.611274e-03
+  R2              = +9.159277e-01
+  sum(std_beta^2) = +1.893706e-01
+  using Bootstrap with K = 200:
+    avg(MSE) = +6.763456e-03
+    avg(R2)  = +9.139925e-01
+    Bias     = +7.865460e-02
+    Variance = +6.967529e-02
+
+  penalty         = +3.131313e-02
+  MSE             = +6.627128e-03
+  R2              = +9.157261e-01
+  sum(std_beta^2) = +1.869531e-01
+  using Bootstrap with K = 200:
+    avg(MSE) = +6.772782e-03
+    avg(R2)  = +9.138739e-01
+    Bias     = +7.865589e-02
+    Variance = +7.010217e-02
+
+  penalty         = +3.181818e-02
+  MSE             = +6.642637e-03
+  R2              = +9.155289e-01
+  sum(std_beta^2) = +1.899829e-01
+  using Bootstrap with K = 200:
+    avg(MSE) = +6.778531e-03
+    avg(R2)  = +9.138008e-01
+    Bias     = +7.865100e-02
+    Variance = +6.973052e-02
+
+  penalty         = +3.232323e-02
+  MSE             = +6.657813e-03
+  R2              = +9.153359e-01
+  sum(std_beta^2) = +1.870501e-01
+  using Bootstrap with K = 200:
+    avg(MSE) = +6.801226e-03
+    avg(R2)  = +9.135122e-01
+    Bias     = +7.865367e-02
+    Variance = +7.003443e-02
+
+  penalty         = +3.282828e-02
+  MSE             = +6.672670e-03
+  R2              = +9.151470e-01
+  sum(std_beta^2) = +1.863945e-01
+  using Bootstrap with K = 200:
+    avg(MSE) = +6.819367e-03
+    avg(R2)  = +9.132815e-01
+    Bias     = +7.865605e-02
+    Variance = +7.008056e-02
+
+  penalty         = +3.333333e-02
+  MSE             = +6.687219e-03
+  R2              = +9.149620e-01
+  sum(std_beta^2) = +1.902516e-01
+  using Bootstrap with K = 200:
+    avg(MSE) = +6.827965e-03
+    avg(R2)  = +9.131721e-01
+    Bias     = +7.865659e-02
+    Variance = +6.994618e-02
+
+  penalty         = +3.383838e-02
+  MSE             = +6.701470e-03
+  R2              = +9.147807e-01
+  sum(std_beta^2) = +1.897823e-01
+  using Bootstrap with K = 200:
+    avg(MSE) = +6.838931e-03
+    avg(R2)  = +9.130327e-01
+    Bias     = +7.865486e-02
+    Variance = +6.996878e-02
+
+  penalty         = +3.434343e-02
+  MSE             = +6.715436e-03
+  R2              = +9.146031e-01
+  sum(std_beta^2) = +1.860669e-01
+  using Bootstrap with K = 200:
+    avg(MSE) = +6.850782e-03
+    avg(R2)  = +9.128820e-01
+    Bias     = +7.865620e-02
+    Variance = +7.021179e-02
+
+  penalty         = +3.484849e-02
+  MSE             = +6.729125e-03
+  R2              = +9.144290e-01
+  sum(std_beta^2) = +1.881979e-01
+  using Bootstrap with K = 200:
+    avg(MSE) = +6.883100e-03
+    avg(R2)  = +9.124710e-01
+    Bias     = +7.865406e-02
+    Variance = +7.012945e-02
+
+  penalty         = +3.535354e-02
+  MSE             = +6.742549e-03
+  R2              = +9.142583e-01
+  sum(std_beta^2) = +1.888077e-01
+  using Bootstrap with K = 200:
+    avg(MSE) = +6.874422e-03
+    avg(R2)  = +9.125814e-01
+    Bias     = +7.865387e-02
+    Variance = +6.991306e-02
+
+  penalty         = +3.585859e-02
+  MSE             = +6.755715e-03
+  R2              = +9.140909e-01
+  sum(std_beta^2) = +1.875969e-01
+  using Bootstrap with K = 200:
+    avg(MSE) = +6.912856e-03
+    avg(R2)  = +9.120926e-01
+    Bias     = +7.865776e-02
+    Variance = +6.945867e-02
+
+  penalty         = +3.636364e-02
+  MSE             = +6.768634e-03
+  R2              = +9.139266e-01
+  sum(std_beta^2) = +1.902045e-01
+  using Bootstrap with K = 200:
+    avg(MSE) = +6.909219e-03
+    avg(R2)  = +9.121389e-01
+    Bias     = +7.865490e-02
+    Variance = +6.967005e-02
+
+  penalty         = +3.686869e-02
+  MSE             = +6.781313e-03
+  R2              = +9.137654e-01
+  sum(std_beta^2) = +1.881500e-01
+  using Bootstrap with K = 200:
+    avg(MSE) = +6.924000e-03
+    avg(R2)  = +9.119509e-01
+    Bias     = +7.865777e-02
+    Variance = +6.991253e-02
+
+  penalty         = +3.737374e-02
+  MSE             = +6.793760e-03
+  R2              = +9.136071e-01
+  sum(std_beta^2) = +1.913645e-01
+  using Bootstrap with K = 200:
+    avg(MSE) = +6.942348e-03
+    avg(R2)  = +9.117176e-01
+    Bias     = +7.865793e-02
+    Variance = +6.967164e-02
+
+  penalty         = +3.787879e-02
+  MSE             = +6.805983e-03
+  R2              = +9.134517e-01
+  sum(std_beta^2) = +1.868619e-01
+  using Bootstrap with K = 200:
+    avg(MSE) = +6.950165e-03
+    avg(R2)  = +9.116182e-01
+    Bias     = +7.865728e-02
+    Variance = +6.994356e-02
+
+  penalty         = +3.838384e-02
+  MSE             = +6.817990e-03
+  R2              = +9.132990e-01
+  sum(std_beta^2) = +1.879403e-01
+  using Bootstrap with K = 200:
+    avg(MSE) = +6.968020e-03
+    avg(R2)  = +9.113911e-01
+    Bias     = +7.865456e-02
+    Variance = +6.993012e-02
+
+  penalty         = +3.888889e-02
+  MSE             = +6.829788e-03
+  R2              = +9.131490e-01
+  sum(std_beta^2) = +1.863281e-01
+  using Bootstrap with K = 200:
+    avg(MSE) = +6.958636e-03
+    avg(R2)  = +9.115105e-01
+    Bias     = +7.865514e-02
+    Variance = +7.003609e-02
+
+  penalty         = +3.939394e-02
+  MSE             = +6.841382e-03
+  R2              = +9.130015e-01
+  sum(std_beta^2) = +1.849976e-01
+  using Bootstrap with K = 200:
+    avg(MSE) = +6.996088e-03
+    avg(R2)  = +9.110342e-01
+    Bias     = +7.865724e-02
+    Variance = +6.983997e-02
+
+  penalty         = +3.989899e-02
+  MSE             = +6.852781e-03
+  R2              = +9.128566e-01
+  sum(std_beta^2) = +1.870518e-01
+  using Bootstrap with K = 200:
+    avg(MSE) = +7.008109e-03
+    avg(R2)  = +9.108813e-01
+    Bias     = +7.865762e-02
+    Variance = +6.945723e-02
+
+  penalty         = +4.040404e-02
+  MSE             = +6.863989e-03
+  R2              = +9.127140e-01
+  sum(std_beta^2) = +1.851795e-01
+  using Bootstrap with K = 200:
+    avg(MSE) = +7.005539e-03
+    avg(R2)  = +9.109140e-01
+    Bias     = +7.865651e-02
+    Variance = +6.955199e-02
+
+  penalty         = +4.090909e-02
+  MSE             = +6.875014e-03
+  R2              = +9.125739e-01
+  sum(std_beta^2) = +1.853944e-01
+  using Bootstrap with K = 200:
+    avg(MSE) = +7.025391e-03
+    avg(R2)  = +9.106616e-01
+    Bias     = +7.865642e-02
+    Variance = +6.934121e-02
+
+  penalty         = +4.141414e-02
+  MSE             = +6.885860e-03
+  R2              = +9.124359e-01
+  sum(std_beta^2) = +1.867350e-01
+  using Bootstrap with K = 200:
+    avg(MSE) = +7.030382e-03
+    avg(R2)  = +9.105981e-01
+    Bias     = +7.865602e-02
+    Variance = +6.948439e-02
+
+  penalty         = +4.191919e-02
+  MSE             = +6.896533e-03
+  R2              = +9.123002e-01
+  sum(std_beta^2) = +1.877062e-01
+  using Bootstrap with K = 200:
+    avg(MSE) = +7.033217e-03
+    avg(R2)  = +9.105621e-01
+    Bias     = +7.865494e-02
+    Variance = +6.986523e-02
+
+  penalty         = +4.242424e-02
+  MSE             = +6.907039e-03
+  R2              = +9.121666e-01
+  sum(std_beta^2) = +1.871123e-01
+  using Bootstrap with K = 200:
+    avg(MSE) = +7.052583e-03
+    avg(R2)  = +9.103158e-01
+    Bias     = +7.865377e-02
+    Variance = +6.955449e-02
+
+  penalty         = +4.292929e-02
+  MSE             = +6.917382e-03
+  R2              = +9.120351e-01
+  sum(std_beta^2) = +1.852321e-01
+  using Bootstrap with K = 200:
+    avg(MSE) = +7.072166e-03
+    avg(R2)  = +9.100668e-01
+    Bias     = +7.865854e-02
+    Variance = +6.963678e-02
+
+  penalty         = +4.343434e-02
+  MSE             = +6.927567e-03
+  R2              = +9.119056e-01
+  sum(std_beta^2) = +1.851465e-01
+  using Bootstrap with K = 200:
+    avg(MSE) = +7.075462e-03
+    avg(R2)  = +9.100249e-01
+    Bias     = +7.865641e-02
+    Variance = +6.938280e-02
+
+  penalty         = +4.393939e-02
+  MSE             = +6.937599e-03
+  R2              = +9.117780e-01
+  sum(std_beta^2) = +1.883174e-01
+  using Bootstrap with K = 200:
+    avg(MSE) = +7.093833e-03
+    avg(R2)  = +9.097912e-01
+    Bias     = +7.865330e-02
+    Variance = +6.928509e-02
+
+  penalty         = +4.444444e-02
+  MSE             = +6.947482e-03
+  R2              = +9.116523e-01
+  sum(std_beta^2) = +1.864483e-01
+  using Bootstrap with K = 200:
+    avg(MSE) = +7.102475e-03
+    avg(R2)  = +9.096814e-01
+    Bias     = +7.865427e-02
+    Variance = +6.901633e-02
+
+  penalty         = +4.494950e-02
+  MSE             = +6.957221e-03
+  R2              = +9.115285e-01
+  sum(std_beta^2) = +1.845464e-01
+  using Bootstrap with K = 200:
+    avg(MSE) = +7.104104e-03
+    avg(R2)  = +9.096606e-01
+    Bias     = +7.865689e-02
+    Variance = +6.923362e-02
+
+  penalty         = +4.545455e-02
+  MSE             = +6.966820e-03
+  R2              = +9.114064e-01
+  sum(std_beta^2) = +1.859044e-01
+  using Bootstrap with K = 200:
+    avg(MSE) = +7.114912e-03
+    avg(R2)  = +9.095232e-01
+    Bias     = +7.865579e-02
+    Variance = +6.962881e-02
+
+  penalty         = +4.595960e-02
+  MSE             = +6.976283e-03
+  R2              = +9.112861e-01
+  sum(std_beta^2) = +1.875895e-01
+  using Bootstrap with K = 200:
+    avg(MSE) = +7.107504e-03
+    avg(R2)  = +9.096174e-01
+    Bias     = +7.865409e-02
+    Variance = +6.927865e-02
+
+  penalty         = +4.646465e-02
+  MSE             = +6.985613e-03
+  R2              = +9.111674e-01
+  sum(std_beta^2) = +1.843768e-01
+  using Bootstrap with K = 200:
+    avg(MSE) = +7.120707e-03
+    avg(R2)  = +9.094495e-01
+    Bias     = +7.865532e-02
+    Variance = +6.947910e-02
+
+  penalty         = +4.696970e-02
+  MSE             = +6.994815e-03
+  R2              = +9.110504e-01
+  sum(std_beta^2) = +1.846654e-01
+  using Bootstrap with K = 200:
+    avg(MSE) = +7.146294e-03
+    avg(R2)  = +9.091241e-01
+    Bias     = +7.865558e-02
+    Variance = +6.945640e-02
+
+  penalty         = +4.747475e-02
+  MSE             = +7.003891e-03
+  R2              = +9.109350e-01
+  sum(std_beta^2) = +1.854071e-01
+  using Bootstrap with K = 200:
+    avg(MSE) = +7.143816e-03
+    avg(R2)  = +9.091556e-01
+    Bias     = +7.865571e-02
+    Variance = +6.941979e-02
+
+  penalty         = +4.797980e-02
+  MSE             = +7.012846e-03
+  R2              = +9.108211e-01
+  sum(std_beta^2) = +1.833891e-01
+  using Bootstrap with K = 200:
+    avg(MSE) = +7.164583e-03
+    avg(R2)  = +9.088915e-01
+    Bias     = +7.865563e-02
+    Variance = +6.960669e-02
+
+  penalty         = +4.848485e-02
+  MSE             = +7.021682e-03
+  R2              = +9.107087e-01
+  sum(std_beta^2) = +1.865434e-01
+  using Bootstrap with K = 200:
+    avg(MSE) = +7.162987e-03
+    avg(R2)  = +9.089118e-01
+    Bias     = +7.865688e-02
+    Variance = +6.950995e-02
+
+  penalty         = +4.898990e-02
+  MSE             = +7.030404e-03
+  R2              = +9.105978e-01
+  sum(std_beta^2) = +1.862301e-01
+  using Bootstrap with K = 200:
+    avg(MSE) = +7.178630e-03
+    avg(R2)  = +9.087129e-01
+    Bias     = +7.865890e-02
+    Variance = +6.962299e-02
+
+  penalty         = +4.949495e-02
+  MSE             = +7.039013e-03
+  R2              = +9.104884e-01
+  sum(std_beta^2) = +1.856274e-01
+  using Bootstrap with K = 200:
+    avg(MSE) = +7.189160e-03
+    avg(R2)  = +9.085790e-01
+    Bias     = +7.865621e-02
+    Variance = +6.918891e-02
+
+  penalty         = +5.000000e-02
+  MSE             = +7.047513e-03
+  R2              = +9.103803e-01
+  sum(std_beta^2) = +1.836905e-01
+  using Bootstrap with K = 200:
+    avg(MSE) = +7.190774e-03
+    avg(R2)  = +9.085585e-01
+    Bias     = +7.865493e-02
+    Variance = +6.919046e-02
+
+----------------------------------------------------------------------
+Lasso Regression:
+
+  penalty         = +1.000000e-09
+  MSE             = +1.505784e-03
+  R2              = +9.808517e-01
+  sum(std_beta^2) = -2.256744e+00
+  using Bootstrap with K = 200:
+    avg(MSE) = +1.625780e-03
+    avg(R2)  = +9.793258e-01
+    Bias     = +7.864214e-02
+    Variance = +7.735059e-02
+
+  penalty         = +5.050515e-04
+  MSE             = +1.010929e-02
+  R2              = +8.714451e-01
+  sum(std_beta^2) = -2.256744e+00
+  using Bootstrap with K = 200:
+    avg(MSE) = +1.062520e-02
+    avg(R2)  = +8.648846e-01
+    Bias     = +7.866671e-02
+    Variance = +6.300496e-02
+
+  penalty         = +1.010102e-03
+  MSE             = +1.226216e-02
+  R2              = +8.440682e-01
+  sum(std_beta^2) = -2.256744e+00
+  using Bootstrap with K = 200:
+    avg(MSE) = +1.284276e-02
+    avg(R2)  = +8.366850e-01
+    Bias     = +7.866910e-02
+    Variance = +5.715784e-02
+
+  penalty         = +1.515152e-03
+  MSE             = +1.641581e-02
+  R2              = +7.912483e-01
+  sum(std_beta^2) = -2.256744e+00
+  using Bootstrap with K = 200:
+    avg(MSE) = +1.609968e-02
+    avg(R2)  = +7.952683e-01
+    Bias     = +7.868711e-02
+    Variance = +4.996168e-02
+
+  penalty         = +2.020203e-03
+  MSE             = +1.641581e-02
+  R2              = +7.912483e-01
+  sum(std_beta^2) = -2.256744e+00
+  using Bootstrap with K = 200:
+    avg(MSE) = +1.648777e-02
+    avg(R2)  = +7.903333e-01
+    Bias     = +7.869132e-02
+    Variance = +4.933122e-02
+
+  penalty         = +2.525253e-03
+  MSE             = +1.641581e-02
+  R2              = +7.912483e-01
+  sum(std_beta^2) = -2.256744e+00
+  using Bootstrap with K = 200:
+    avg(MSE) = +1.731412e-02
+    avg(R2)  = +7.798250e-01
+    Bias     = +7.868225e-02
+    Variance = +4.883980e-02
+
+  penalty         = +3.030304e-03
+  MSE             = +1.865587e-02
+  R2              = +7.627626e-01
+  sum(std_beta^2) = -2.256744e+00
+  using Bootstrap with K = 200:
+    avg(MSE) = +1.975780e-02
+    avg(R2)  = +7.487498e-01
+    Bias     = +7.871059e-02
+    Variance = +4.641246e-02
+
+  penalty         = +3.535354e-03
+  MSE             = +2.523640e-02
+  R2              = +6.790812e-01
+  sum(std_beta^2) = -2.256744e+00
+  using Bootstrap with K = 200:
+    avg(MSE) = +2.273356e-02
+    avg(R2)  = +7.109086e-01
+    Bias     = +7.870852e-02
+    Variance = +4.326660e-02
+
+  penalty         = +4.040405e-03
+  MSE             = +2.523640e-02
+  R2              = +6.790812e-01
+  sum(std_beta^2) = -2.256744e+00
+  using Bootstrap with K = 200:
+    avg(MSE) = +2.468909e-02
+    avg(R2)  = +6.860411e-01
+    Bias     = +7.872078e-02
+    Variance = +4.107206e-02
+
+  penalty         = +4.545455e-03
+  MSE             = +2.523640e-02
+  R2              = +6.790812e-01
+  sum(std_beta^2) = -2.256744e+00
+  using Bootstrap with K = 200:
+    avg(MSE) = +2.576262e-02
+    avg(R2)  = +6.723896e-01
+    Bias     = +7.874719e-02
+    Variance = +3.963066e-02
+
+  penalty         = +5.050506e-03
+  MSE             = +2.786599e-02
+  R2              = +6.456420e-01
+  sum(std_beta^2) = -2.256744e+00
+  using Bootstrap with K = 200:
+    avg(MSE) = +2.799321e-02
+    avg(R2)  = +6.440242e-01
+    Bias     = +7.880290e-02
+    Variance = +3.499493e-02
+
+  penalty         = +5.555556e-03
+  MSE             = +2.786599e-02
+  R2              = +6.456420e-01
+  sum(std_beta^2) = -2.256744e+00
+  using Bootstrap with K = 200:
+    avg(MSE) = +2.957855e-02
+    avg(R2)  = +6.238643e-01
+    Bias     = +7.881152e-02
+    Variance = +3.118185e-02
+
+  penalty         = +6.060607e-03
+  MSE             = +2.786599e-02
+  R2              = +6.456420e-01
+  sum(std_beta^2) = -2.256744e+00
+  using Bootstrap with K = 200:
+    avg(MSE) = +3.005127e-02
+    avg(R2)  = +6.178529e-01
+    Bias     = +7.881080e-02
+    Variance = +2.971117e-02
+
+  penalty         = +6.565657e-03
+  MSE             = +2.786599e-02
+  R2              = +6.456420e-01
+  sum(std_beta^2) = -2.256744e+00
+  using Bootstrap with K = 200:
+    avg(MSE) = +3.159956e-02
+    avg(R2)  = +5.981640e-01
+    Bias     = +7.885458e-02
+    Variance = +2.753320e-02
+
+  penalty         = +7.070708e-03
+  MSE             = +2.786599e-02
+  R2              = +6.456420e-01
+  sum(std_beta^2) = -2.256744e+00
+  using Bootstrap with K = 200:
+    avg(MSE) = +3.273156e-02
+    avg(R2)  = +5.837689e-01
+    Bias     = +7.890693e-02
+    Variance = +2.556515e-02
+
+  penalty         = +7.575758e-03
+  MSE             = +2.786599e-02
+  R2              = +6.456420e-01
+  sum(std_beta^2) = -2.256744e+00
+  using Bootstrap with K = 200:
+    avg(MSE) = +3.360366e-02
+    avg(R2)  = +5.726789e-01
+    Bias     = +7.890896e-02
+    Variance = +2.430938e-02
+
+  penalty         = +8.080809e-03
+  MSE             = +2.786599e-02
+  R2              = +6.456420e-01
+  sum(std_beta^2) = -2.256744e+00
+  using Bootstrap with K = 200:
+    avg(MSE) = +3.445229e-02
+    avg(R2)  = +5.618873e-01
+    Bias     = +7.891632e-02
+    Variance = +2.306387e-02
+
+  penalty         = +8.585859e-03
+  MSE             = +4.342022e-02
+  R2              = +4.478466e-01
+  sum(std_beta^2) = -2.256744e+00
+  using Bootstrap with K = 200:
+    avg(MSE) = +3.550161e-02
+    avg(R2)  = +5.485436e-01
+    Bias     = +7.893956e-02
+    Variance = +2.137337e-02
+
+  penalty         = +9.090910e-03
+  MSE             = +4.342022e-02
+  R2              = +4.478466e-01
+  sum(std_beta^2) = -2.256744e+00
+  using Bootstrap with K = 200:
+    avg(MSE) = +3.625757e-02
+    avg(R2)  = +5.389305e-01
+    Bias     = +7.896026e-02
+    Variance = +2.041601e-02
+
+  penalty         = +9.595960e-03
+  MSE             = +4.342022e-02
+  R2              = +4.478466e-01
+  sum(std_beta^2) = -2.256744e+00
+  using Bootstrap with K = 200:
+    avg(MSE) = +3.773510e-02
+    avg(R2)  = +5.201414e-01
+    Bias     = +7.899468e-02
+    Variance = +1.838309e-02
+
+  penalty         = +1.010101e-02
+  MSE             = +4.342022e-02
+  R2              = +4.478466e-01
+  sum(std_beta^2) = -2.256744e+00
+  using Bootstrap with K = 200:
+    avg(MSE) = +3.787363e-02
+    avg(R2)  = +5.183799e-01
+    Bias     = +7.900953e-02
+    Variance = +1.838692e-02
+
+  penalty         = +1.060606e-02
+  MSE             = +4.342022e-02
+  R2              = +4.478466e-01
+  sum(std_beta^2) = -2.256744e+00
+  using Bootstrap with K = 200:
+    avg(MSE) = +3.877815e-02
+    avg(R2)  = +5.068775e-01
+    Bias     = +7.903983e-02
+    Variance = +1.717957e-02
+
+  penalty         = +1.111111e-02
+  MSE             = +4.342022e-02
+  R2              = +4.478466e-01
+  sum(std_beta^2) = -2.256744e+00
+  using Bootstrap with K = 200:
+    avg(MSE) = +3.977822e-02
+    avg(R2)  = +4.941601e-01
+    Bias     = +7.906278e-02
+    Variance = +1.609133e-02
+
+  penalty         = +1.161616e-02
+  MSE             = +4.342022e-02
+  R2              = +4.478466e-01
+  sum(std_beta^2) = -2.256744e+00
+  using Bootstrap with K = 200:
+    avg(MSE) = +4.037614e-02
+    avg(R2)  = +4.865566e-01
+    Bias     = +7.904019e-02
+    Variance = +1.551652e-02
+
+  penalty         = +1.212121e-02
+  MSE             = +4.342022e-02
+  R2              = +4.478466e-01
+  sum(std_beta^2) = -2.256744e+00
+  using Bootstrap with K = 200:
+    avg(MSE) = +4.046167e-02
+    avg(R2)  = +4.854690e-01
+    Bias     = +7.901906e-02
+    Variance = +1.544411e-02
+
+  penalty         = +1.262626e-02
+  MSE             = +4.342022e-02
+  R2              = +4.478466e-01
+  sum(std_beta^2) = -2.256744e+00
+  using Bootstrap with K = 200:
+    avg(MSE) = +4.083790e-02
+    avg(R2)  = +4.806847e-01
+    Bias     = +7.903149e-02
+    Variance = +1.502305e-02
+
+  penalty         = +1.313131e-02
+  MSE             = +4.342022e-02
+  R2              = +4.478466e-01
+  sum(std_beta^2) = -2.256744e+00
+  using Bootstrap with K = 200:
+    avg(MSE) = +4.125436e-02
+    avg(R2)  = +4.753887e-01
+    Bias     = +7.908374e-02
+    Variance = +1.465043e-02
+
+  penalty         = +1.363636e-02
+  MSE             = +4.342022e-02
+  R2              = +4.478466e-01
+  sum(std_beta^2) = -2.256744e+00
+  using Bootstrap with K = 200:
+    avg(MSE) = +4.167999e-02
+    avg(R2)  = +4.699762e-01
+    Bias     = +7.909632e-02
+    Variance = +1.424262e-02
+
+  penalty         = +1.414141e-02
+  MSE             = +4.342022e-02
+  R2              = +4.478466e-01
+  sum(std_beta^2) = -2.256744e+00
+  using Bootstrap with K = 200:
+    avg(MSE) = +4.173972e-02
+    avg(R2)  = +4.692167e-01
+    Bias     = +7.909664e-02
+    Variance = +1.420791e-02
+
+  penalty         = +1.464647e-02
+  MSE             = +4.342022e-02
+  R2              = +4.478466e-01
+  sum(std_beta^2) = -2.256744e+00
+  using Bootstrap with K = 200:
+    avg(MSE) = +4.174186e-02
+    avg(R2)  = +4.691894e-01
+    Bias     = +7.904813e-02
+    Variance = +1.423841e-02
+
+  penalty         = +1.515152e-02
+  MSE             = +4.342022e-02
+  R2              = +4.478466e-01
+  sum(std_beta^2) = -2.256744e+00
+  using Bootstrap with K = 200:
+    avg(MSE) = +4.241199e-02
+    avg(R2)  = +4.606678e-01
+    Bias     = +7.909293e-02
+    Variance = +1.376002e-02
+
+  penalty         = +1.565657e-02
+  MSE             = +4.342022e-02
+  R2              = +4.478466e-01
+  sum(std_beta^2) = -2.256744e+00
+  using Bootstrap with K = 200:
+    avg(MSE) = +4.224473e-02
+    avg(R2)  = +4.627947e-01
+    Bias     = +7.908248e-02
+    Variance = +1.395780e-02
+
+  penalty         = +1.616162e-02
+  MSE             = +4.342022e-02
+  R2              = +4.478466e-01
+  sum(std_beta^2) = -2.256744e+00
+  using Bootstrap with K = 200:
+    avg(MSE) = +4.271404e-02
+    avg(R2)  = +4.568268e-01
+    Bias     = +7.910864e-02
+    Variance = +1.345739e-02
+
+  penalty         = +1.666667e-02
+  MSE             = +4.342022e-02
+  R2              = +4.478466e-01
+  sum(std_beta^2) = -2.256744e+00
+  using Bootstrap with K = 200:
+    avg(MSE) = +4.335070e-02
+    avg(R2)  = +4.487307e-01
+    Bias     = +7.911516e-02
+    Variance = +1.306612e-02
+
+  penalty         = +1.717172e-02
+  MSE             = +4.342022e-02
+  R2              = +4.478466e-01
+  sum(std_beta^2) = -2.256744e+00
+  using Bootstrap with K = 200:
+    avg(MSE) = +4.341517e-02
+    avg(R2)  = +4.479108e-01
+    Bias     = +7.916374e-02
+    Variance = +1.319800e-02
+
+  penalty         = +1.767677e-02
+  MSE             = +4.342022e-02
+  R2              = +4.478466e-01
+  sum(std_beta^2) = -2.256744e+00
+  using Bootstrap with K = 200:
+    avg(MSE) = +4.486555e-02
+    avg(R2)  = +4.294670e-01
+    Bias     = +7.921167e-02
+    Variance = +1.205878e-02
+
+  penalty         = +1.818182e-02
+  MSE             = +4.342022e-02
+  R2              = +4.478466e-01
+  sum(std_beta^2) = -2.256744e+00
+  using Bootstrap with K = 200:
+    avg(MSE) = +4.490319e-02
+    avg(R2)  = +4.289883e-01
+    Bias     = +7.920545e-02
+    Variance = +1.198611e-02
+
+  penalty         = +1.868687e-02
+  MSE             = +4.342022e-02
+  R2              = +4.478466e-01
+  sum(std_beta^2) = -2.256744e+00
+  using Bootstrap with K = 200:
+    avg(MSE) = +4.592344e-02
+    avg(R2)  = +4.160144e-01
+    Bias     = +7.921376e-02
+    Variance = +1.136738e-02
+
+  penalty         = +1.919192e-02
+  MSE             = +4.342022e-02
+  R2              = +4.478466e-01
+  sum(std_beta^2) = -2.256744e+00
+  using Bootstrap with K = 200:
+    avg(MSE) = +4.642854e-02
+    avg(R2)  = +4.095913e-01
+    Bias     = +7.927697e-02
+    Variance = +1.108638e-02
+
+  penalty         = +1.969697e-02
+  MSE             = +4.342022e-02
+  R2              = +4.478466e-01
+  sum(std_beta^2) = -2.256744e+00
+  using Bootstrap with K = 200:
+    avg(MSE) = +4.732746e-02
+    avg(R2)  = +3.981601e-01
+    Bias     = +7.930264e-02
+    Variance = +1.039533e-02
+
+  penalty         = +2.020202e-02
+  MSE             = +4.342022e-02
+  R2              = +4.478466e-01
+  sum(std_beta^2) = -2.256744e+00
+  using Bootstrap with K = 200:
+    avg(MSE) = +4.780185e-02
+    avg(R2)  = +3.921276e-01
+    Bias     = +7.931664e-02
+    Variance = +1.018652e-02
+
+  penalty         = +2.070707e-02
+  MSE             = +5.753539e-02
+  R2              = +2.683510e-01
+  sum(std_beta^2) = -2.256744e+00
+  using Bootstrap with K = 200:
+    avg(MSE) = +4.998319e-02
+    avg(R2)  = +3.643886e-01
+    Bias     = +7.940797e-02
+    Variance = +9.010451e-03
+
+  penalty         = +2.121212e-02
+  MSE             = +5.753539e-02
+  R2              = +2.683510e-01
+  sum(std_beta^2) = -2.256744e+00
+  using Bootstrap with K = 200:
+    avg(MSE) = +5.125365e-02
+    avg(R2)  = +3.482327e-01
+    Bias     = +7.944854e-02
+    Variance = +8.092318e-03
+
+  penalty         = +2.171717e-02
+  MSE             = +5.753539e-02
+  R2              = +2.683510e-01
+  sum(std_beta^2) = -2.256744e+00
+  using Bootstrap with K = 200:
+    avg(MSE) = +5.194783e-02
+    avg(R2)  = +3.394052e-01
+    Bias     = +7.945933e-02
+    Variance = +7.802907e-03
+
+  penalty         = +2.222222e-02
+  MSE             = +5.753539e-02
+  R2              = +2.683510e-01
+  sum(std_beta^2) = -2.256744e+00
+  using Bootstrap with K = 200:
+    avg(MSE) = +5.313356e-02
+    avg(R2)  = +3.243268e-01
+    Bias     = +7.954081e-02
+    Variance = +7.111205e-03
+
+  penalty         = +2.272727e-02
+  MSE             = +5.753539e-02
+  R2              = +2.683510e-01
+  sum(std_beta^2) = -2.256744e+00
+  using Bootstrap with K = 200:
+    avg(MSE) = +5.313272e-02
+    avg(R2)  = +3.243375e-01
+    Bias     = +7.945401e-02
+    Variance = +6.889134e-03
+
+  penalty         = +2.323232e-02
+  MSE             = +5.753539e-02
+  R2              = +2.683510e-01
+  sum(std_beta^2) = -2.256744e+00
+  using Bootstrap with K = 200:
+    avg(MSE) = +5.540778e-02
+    avg(R2)  = +2.954067e-01
+    Bias     = +7.963468e-02
+    Variance = +6.060792e-03
+
+  penalty         = +2.373737e-02
+  MSE             = +5.753539e-02
+  R2              = +2.683510e-01
+  sum(std_beta^2) = -2.256744e+00
+  using Bootstrap with K = 200:
+    avg(MSE) = +5.672715e-02
+    avg(R2)  = +2.786289e-01
+    Bias     = +7.966331e-02
+    Variance = +5.526473e-03
+
+  penalty         = +2.424242e-02
+  MSE             = +5.753539e-02
+  R2              = +2.683510e-01
+  sum(std_beta^2) = -2.256744e+00
+  using Bootstrap with K = 200:
+    avg(MSE) = +5.720383e-02
+    avg(R2)  = +2.725672e-01
+    Bias     = +7.969435e-02
+    Variance = +5.402690e-03
+
+  penalty         = +2.474748e-02
+  MSE             = +5.753539e-02
+  R2              = +2.683510e-01
+  sum(std_beta^2) = -2.256744e+00
+  using Bootstrap with K = 200:
+    avg(MSE) = +5.775512e-02
+    avg(R2)  = +2.655568e-01
+    Bias     = +7.966419e-02
+    Variance = +4.978783e-03
+
+  penalty         = +2.525253e-02
+  MSE             = +5.753539e-02
+  R2              = +2.683510e-01
+  sum(std_beta^2) = -2.256744e+00
+  using Bootstrap with K = 200:
+    avg(MSE) = +6.082309e-02
+    avg(R2)  = +2.265429e-01
+    Bias     = +7.992395e-02
+    Variance = +4.252520e-03
+
+  penalty         = +2.575758e-02
+  MSE             = +5.753539e-02
+  R2              = +2.683510e-01
+  sum(std_beta^2) = -2.256744e+00
+  using Bootstrap with K = 200:
+    avg(MSE) = +6.088925e-02
+    avg(R2)  = +2.257016e-01
+    Bias     = +7.991167e-02
+    Variance = +4.217391e-03
+
+  penalty         = +2.626263e-02
+  MSE             = +5.753539e-02
+  R2              = +2.683510e-01
+  sum(std_beta^2) = -2.256744e+00
+  using Bootstrap with K = 200:
+    avg(MSE) = +6.206192e-02
+    avg(R2)  = +2.107893e-01
+    Bias     = +8.000413e-02
+    Variance = +3.770707e-03
+
+  penalty         = +2.676768e-02
+  MSE             = +5.753539e-02
+  R2              = +2.683510e-01
+  sum(std_beta^2) = -2.256744e+00
+  using Bootstrap with K = 200:
+    avg(MSE) = +6.401605e-02
+    avg(R2)  = +1.859396e-01
+    Bias     = +8.000722e-02
+    Variance = +3.381452e-03
+
+  penalty         = +2.727273e-02
+  MSE             = +5.753539e-02
+  R2              = +2.683510e-01
+  sum(std_beta^2) = -2.256744e+00
+  using Bootstrap with K = 200:
+    avg(MSE) = +6.383363e-02
+    avg(R2)  = +1.882594e-01
+    Bias     = +8.002957e-02
+    Variance = +3.296106e-03
+
+  penalty         = +2.777778e-02
+  MSE             = +5.753539e-02
+  R2              = +2.683510e-01
+  sum(std_beta^2) = -2.256744e+00
+  using Bootstrap with K = 200:
+    avg(MSE) = +6.667340e-02
+    avg(R2)  = +1.521474e-01
+    Bias     = +8.021129e-02
+    Variance = +2.626988e-03
+
+  penalty         = +2.828283e-02
+  MSE             = +5.753539e-02
+  R2              = +2.683510e-01
+  sum(std_beta^2) = -2.256744e+00
+  using Bootstrap with K = 200:
+    avg(MSE) = +6.675509e-02
+    avg(R2)  = +1.511087e-01
+    Bias     = +8.011299e-02
+    Variance = +2.609103e-03
+
+  penalty         = +2.878788e-02
+  MSE             = +5.753539e-02
+  R2              = +2.683510e-01
+  sum(std_beta^2) = -2.256744e+00
+  using Bootstrap with K = 200:
+    avg(MSE) = +6.781867e-02
+    avg(R2)  = +1.375836e-01
+    Bias     = +8.018535e-02
+    Variance = +2.368750e-03
+
+  penalty         = +2.929293e-02
+  MSE             = +5.753539e-02
+  R2              = +2.683510e-01
+  sum(std_beta^2) = -2.256744e+00
+  using Bootstrap with K = 200:
+    avg(MSE) = +6.938381e-02
+    avg(R2)  = +1.176804e-01
+    Bias     = +8.038145e-02
+    Variance = +1.987171e-03
+
+  penalty         = +2.979798e-02
+  MSE             = +8.068608e-02
+  R2              = -2.604484e-02
+  sum(std_beta^2) = -2.256744e+00
+  using Bootstrap with K = 200:
+    avg(MSE) = +7.073226e-02
+    avg(R2)  = +1.005330e-01
+    Bias     = +8.049504e-02
+    Variance = +1.747798e-03
+
+  penalty         = +3.030303e-02
+  MSE             = +8.068608e-02
+  R2              = -2.604484e-02
+  sum(std_beta^2) = -2.256744e+00
+  using Bootstrap with K = 200:
+    avg(MSE) = +7.291187e-02
+    avg(R2)  = +7.281586e-02
+    Bias     = +8.054117e-02
+    Variance = +1.302875e-03
+
+  penalty         = +3.080808e-02
+  MSE             = +8.068608e-02
+  R2              = -2.604484e-02
+  sum(std_beta^2) = -2.256744e+00
+  using Bootstrap with K = 200:
+    avg(MSE) = +7.286558e-02
+    avg(R2)  = +7.340458e-02
+    Bias     = +8.056743e-02
+    Variance = +1.258011e-03
+
+  penalty         = +3.131313e-02
+  MSE             = +8.068608e-02
+  R2              = -2.604484e-02
+  sum(std_beta^2) = -2.256744e+00
+  using Bootstrap with K = 200:
+    avg(MSE) = +7.381842e-02
+    avg(R2)  = +6.128778e-02
+    Bias     = +8.065919e-02
+    Variance = +1.165983e-03
+
+  penalty         = +3.181818e-02
+  MSE             = +8.068608e-02
+  R2              = -2.604484e-02
+  sum(std_beta^2) = -2.256744e+00
+  using Bootstrap with K = 200:
+    avg(MSE) = +7.444278e-02
+    avg(R2)  = +5.334806e-02
+    Bias     = +8.051435e-02
+    Variance = +9.801173e-04
+
+  penalty         = +3.232323e-02
+  MSE             = +8.068608e-02
+  R2              = -2.604484e-02
+  sum(std_beta^2) = -2.256744e+00
+  using Bootstrap with K = 200:
+    avg(MSE) = +7.528428e-02
+    avg(R2)  = +4.264706e-02
+    Bias     = +8.048629e-02
+    Variance = +7.735761e-04
+
+  penalty         = +3.282828e-02
+  MSE             = +8.068608e-02
+  R2              = -2.604484e-02
+  sum(std_beta^2) = -2.256744e+00
+  using Bootstrap with K = 200:
+    avg(MSE) = +7.527037e-02
+    avg(R2)  = +4.282397e-02
+    Bias     = +8.053623e-02
+    Variance = +8.329753e-04
+
+  penalty         = +3.333333e-02
+  MSE             = +8.068608e-02
+  R2              = -2.604484e-02
+  sum(std_beta^2) = -2.256744e+00
+  using Bootstrap with K = 200:
+    avg(MSE) = +7.682744e-02
+    avg(R2)  = +2.302357e-02
+    Bias     = +8.058628e-02
+    Variance = +5.563876e-04
+
+  penalty         = +3.383838e-02
+  MSE             = +8.068608e-02
+  R2              = -2.604484e-02
+  sum(std_beta^2) = -2.256744e+00
+  using Bootstrap with K = 200:
+    avg(MSE) = +7.692952e-02
+    avg(R2)  = +2.172537e-02
+    Bias     = +8.063278e-02
+    Variance = +5.249269e-04
+
+  penalty         = +3.434343e-02
+  MSE             = +8.068608e-02
+  R2              = -2.604484e-02
+  sum(std_beta^2) = -2.256744e+00
+  using Bootstrap with K = 200:
+    avg(MSE) = +7.794786e-02
+    avg(R2)  = +8.775654e-03
+    Bias     = +8.071110e-02
+    Variance = +3.775653e-04
+
+  penalty         = +3.484849e-02
+  MSE             = +8.068608e-02
+  R2              = -2.604484e-02
+  sum(std_beta^2) = -2.256744e+00
+  using Bootstrap with K = 200:
+    avg(MSE) = +7.941038e-02
+    avg(R2)  = -9.822447e-03
+    Bias     = +8.091578e-02
+    Variance = +1.801555e-04
+
+  penalty         = +3.535354e-02
+  MSE             = +8.068608e-02
+  R2              = -2.604484e-02
+  sum(std_beta^2) = -2.256744e+00
+  using Bootstrap with K = 200:
+    avg(MSE) = +7.938825e-02
+    avg(R2)  = -9.541051e-03
+    Bias     = +8.072624e-02
+    Variance = +1.683821e-04
+
+  penalty         = +3.585859e-02
+  MSE             = +8.068608e-02
+  R2              = -2.604484e-02
+  sum(std_beta^2) = -2.256744e+00
+  using Bootstrap with K = 200:
+    avg(MSE) = +7.949740e-02
+    avg(R2)  = -1.092898e-02
+    Bias     = +8.077088e-02
+    Variance = +1.519476e-04
+
+  penalty         = +3.636364e-02
+  MSE             = +8.068608e-02
+  R2              = -2.604484e-02
+  sum(std_beta^2) = -2.256744e+00
+  using Bootstrap with K = 200:
+    avg(MSE) = +7.987984e-02
+    avg(R2)  = -1.579228e-02
+    Bias     = +8.088225e-02
+    Variance = +1.210694e-04
+
+  penalty         = +3.686869e-02
+  MSE             = +8.068608e-02
+  R2              = -2.604484e-02
+  sum(std_beta^2) = -2.256744e+00
+  using Bootstrap with K = 200:
+    avg(MSE) = +8.007827e-02
+    avg(R2)  = -1.831561e-02
+    Bias     = +8.077998e-02
+    Variance = +8.334841e-05
+
+  penalty         = +3.737374e-02
+  MSE             = +8.068608e-02
+  R2              = -2.604484e-02
+  sum(std_beta^2) = -2.256744e+00
+  using Bootstrap with K = 200:
+    avg(MSE) = +8.021152e-02
+    avg(R2)  = -2.001018e-02
+    Bias     = +8.082834e-02
+    Variance = +6.804242e-05
+
+  penalty         = +3.787879e-02
+  MSE             = +8.068608e-02
+  R2              = -2.604484e-02
+  sum(std_beta^2) = -2.256744e+00
+  using Bootstrap with K = 200:
+    avg(MSE) = +8.055710e-02
+    avg(R2)  = -2.440477e-02
+    Bias     = +8.093838e-02
+    Variance = +4.237678e-05
+
+  penalty         = +3.838384e-02
+  MSE             = +8.068608e-02
+  R2              = -2.604484e-02
+  sum(std_beta^2) = -2.256744e+00
+  using Bootstrap with K = 200:
+    avg(MSE) = +8.011506e-02
+    avg(R2)  = -1.878346e-02
+    Bias     = +8.079702e-02
+    Variance = +6.638129e-05
+
+  penalty         = +3.888889e-02
+  MSE             = +8.068608e-02
+  R2              = -2.604484e-02
+  sum(std_beta^2) = -2.256744e+00
+  using Bootstrap with K = 200:
+    avg(MSE) = +8.133756e-02
+    avg(R2)  = -3.432947e-02
+    Bias     = +8.141152e-02
+    Variance = +8.876360e-06
+
+  penalty         = +3.939394e-02
+  MSE             = +8.068608e-02
+  R2              = -2.604484e-02
+  sum(std_beta^2) = -2.256744e+00
+  using Bootstrap with K = 200:
+    avg(MSE) = +8.150568e-02
+    avg(R2)  = -3.646739e-02
+    Bias     = +8.168755e-02
+    Variance = +1.734803e-05
+
+  penalty         = +3.989899e-02
+  MSE             = +8.068608e-02
+  R2              = -2.604484e-02
+  sum(std_beta^2) = -2.256744e+00
+  using Bootstrap with K = 200:
+    avg(MSE) = +8.151898e-02
+    avg(R2)  = -3.663653e-02
+    Bias     = +8.165528e-02
+    Variance = +7.794855e-06
+
+  penalty         = +4.040404e-02
+  MSE             = +8.068608e-02
+  R2              = -2.604484e-02
+  sum(std_beta^2) = -2.256744e+00
+  using Bootstrap with K = 200:
+    avg(MSE) = +8.276285e-02
+    avg(R2)  = -5.245408e-02
+    Bias     = +8.283039e-02
+    Variance = +7.232920e-06
+
+  penalty         = +4.090909e-02
+  MSE             = +8.068608e-02
+  R2              = -2.604484e-02
+  sum(std_beta^2) = -2.256744e+00
+  using Bootstrap with K = 200:
+    avg(MSE) = +8.175817e-02
+    avg(R2)  = -3.967812e-02
+    Bias     = +8.190312e-02
+    Variance = +1.249270e-05
+
+  penalty         = +4.141414e-02
+  MSE             = +8.068608e-02
+  R2              = -2.604484e-02
+  sum(std_beta^2) = -2.256744e+00
+  using Bootstrap with K = 200:
+    avg(MSE) = +8.404426e-02
+    avg(R2)  = -6.874925e-02
+    Bias     = +8.404426e-02
+    Variance = +9.937799e-34
+
+  penalty         = +4.191919e-02
+  MSE             = +8.068608e-02
+  R2              = -2.604484e-02
+  sum(std_beta^2) = -2.256744e+00
+  using Bootstrap with K = 200:
+    avg(MSE) = +8.552417e-02
+    avg(R2)  = -8.756844e-02
+    Bias     = +8.552417e-02
+    Variance = +9.822243e-34
+
+  penalty         = +4.242424e-02
+  MSE             = +8.068608e-02
+  R2              = -2.604484e-02
+  sum(std_beta^2) = -2.256744e+00
+  using Bootstrap with K = 200:
+    avg(MSE) = +8.869447e-02
+    avg(R2)  = -1.278837e-01
+    Bias     = +8.869447e-02
+    Variance = +8.705203e-34
+
+  penalty         = +4.292929e-02
+  MSE             = +8.068608e-02
+  R2              = -2.604484e-02
+  sum(std_beta^2) = -2.256744e+00
+  using Bootstrap with K = 200:
+    avg(MSE) = +9.197335e-02
+    avg(R2)  = -1.695795e-01
+    Bias     = +9.197335e-02
+    Variance = +1.005335e-33
+
+  penalty         = +4.343434e-02
+  MSE             = +8.068608e-02
+  R2              = -2.604484e-02
+  sum(std_beta^2) = -2.256744e+00
+  using Bootstrap with K = 200:
+    avg(MSE) = +9.466051e-02
+    avg(R2)  = -2.037508e-01
+    Bias     = +9.466051e-02
+    Variance = +6.663718e-34
+
+  penalty         = +4.393939e-02
+  MSE             = +8.068608e-02
+  R2              = -2.604484e-02
+  sum(std_beta^2) = -2.256744e+00
+  using Bootstrap with K = 200:
+    avg(MSE) = +1.010884e-01
+    avg(R2)  = -2.854906e-01
+    Bias     = +1.010884e-01
+    Variance = +8.435573e-34
+
+  penalty         = +4.444444e-02
+  MSE             = +8.068608e-02
+  R2              = -2.604484e-02
+  sum(std_beta^2) = -2.256744e+00
+  using Bootstrap with K = 200:
+    avg(MSE) = +1.054935e-01
+    avg(R2)  = -3.415083e-01
+    Bias     = +1.054935e-01
+    Variance = +6.432606e-34
+
+  penalty         = +4.494950e-02
+  MSE             = +8.068608e-02
+  R2              = -2.604484e-02
+  sum(std_beta^2) = -2.256744e+00
+  using Bootstrap with K = 200:
+    avg(MSE) = +1.072166e-01
+    avg(R2)  = -3.634203e-01
+    Bias     = +1.072166e-01
+    Variance = +5.970383e-34
+
+  penalty         = +4.545455e-02
+  MSE             = +1.402106e-01
+  R2              = -7.829882e-01
+  sum(std_beta^2) = -2.256744e+00
+  using Bootstrap with K = 200:
+    avg(MSE) = +1.157077e-01
+    avg(R2)  = -4.713971e-01
+    Bias     = +1.157077e-01
+    Variance = +5.045936e-34
+
+  penalty         = +4.595960e-02
+  MSE             = +1.402106e-01
+  R2              = -7.829882e-01
+  sum(std_beta^2) = -2.256744e+00
+  using Bootstrap with K = 200:
+    avg(MSE) = +1.189056e-01
+    avg(R2)  = -5.120641e-01
+    Bias     = +1.189497e-01
+    Variance = +2.839112e-06
+
+  penalty         = +4.646465e-02
+  MSE             = +1.402106e-01
+  R2              = -7.829882e-01
+  sum(std_beta^2) = -2.256744e+00
+  using Bootstrap with K = 200:
+    avg(MSE) = +1.183482e-01
+    avg(R2)  = -5.049751e-01
+    Bias     = +1.183482e-01
+    Variance = +3.505192e-34
+
+  penalty         = +4.696970e-02
+  MSE             = +1.402106e-01
+  R2              = -7.829882e-01
+  sum(std_beta^2) = -2.256744e+00
+  using Bootstrap with K = 200:
+    avg(MSE) = +1.245999e-01
+    avg(R2)  = -5.844750e-01
+    Bias     = +1.245999e-01
+    Variance = +3.081488e-34
+
+  penalty         = +4.747475e-02
+  MSE             = +1.402106e-01
+  R2              = -7.829882e-01
+  sum(std_beta^2) = -2.256744e+00
+  using Bootstrap with K = 200:
+    avg(MSE) = +1.300342e-01
+    avg(R2)  = -6.535809e-01
+    Bias     = +1.300342e-01
+    Variance = +1.848893e-34
+
+  penalty         = +4.797980e-02
+  MSE             = +1.402106e-01
+  R2              = -7.829882e-01
+  sum(std_beta^2) = -2.256744e+00
+  using Bootstrap with K = 200:
+    avg(MSE) = +1.324327e-01
+    avg(R2)  = -6.840807e-01
+    Bias     = +1.324327e-01
+    Variance = +2.080004e-34
+
+  penalty         = +4.848485e-02
+  MSE             = +1.402106e-01
+  R2              = -7.829882e-01
+  sum(std_beta^2) = -2.256744e+00
+  using Bootstrap with K = 200:
+    avg(MSE) = +1.350776e-01
+    avg(R2)  = -7.177151e-01
+    Bias     = +1.350776e-01
+    Variance = +1.348151e-34
+
+  penalty         = +4.898990e-02
+  MSE             = +1.402106e-01
+  R2              = -7.829882e-01
+  sum(std_beta^2) = -2.256744e+00
+  using Bootstrap with K = 200:
+    avg(MSE) = +1.368752e-01
+    avg(R2)  = -7.405741e-01
+    Bias     = +1.368752e-01
+    Variance = +4.237046e-35
+
+  penalty         = +4.949495e-02
+  MSE             = +1.402106e-01
+  R2              = -7.829882e-01
+  sum(std_beta^2) = -2.256744e+00
+  using Bootstrap with K = 200:
+    avg(MSE) = +1.381084e-01
+    avg(R2)  = -7.562558e-01
+    Bias     = +1.381084e-01
+    Variance = +4.237046e-35
+
+  penalty         = +5.000000e-02
+  MSE             = +1.402106e-01
+  R2              = -7.829882e-01
+  sum(std_beta^2) = -2.256744e+00
+  using Bootstrap with K = 200:
+    avg(MSE) = +1.390037e-01
+    avg(R2)  = -7.676417e-01
+    Bias     = +1.390037e-01
+    Variance = +1.155558e-35
+
+----------------------------------------------------------------------

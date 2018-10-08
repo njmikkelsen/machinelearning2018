@@ -1,0 +1,29 @@
+Polynomial Parametrisation of Franke's Function Using Linear Regression
+
+Franke Parameters:
+  number of data points          = 400
+  minimim x value                = +0.000000e+00
+  maximum x value                = +1.000000e+00
+  minimum y value                = +0.000000e+00
+  maximum y value                = +1.000000e+00
+  standard deviation of noise    = +0.000000e+00
+
+Regression parameters:
+  polynomial degree              = 5
+  number of penalty parameters   = +1.000000e+00
+  minimum penalty                = +1.000000e-09
+  maximum penalty                = +5.000000e-02
+  include Bootstrap              = False
+  number of Bootstrap iterations = 200
+  include OLS regression         = True
+  include Ridge regression       = False
+  include Lasso regression       = False
+
+----------------------------------------------------------------------
+Ordinary Least Squares:
+
+  MSE             = +1.485395e-03
+  R2              = +9.811110e-01
+  sum(std_beta^2) = +3.865426e+01
+
+----------------------------------------------------------------------

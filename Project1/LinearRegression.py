@@ -109,14 +109,14 @@ class LinearRegression():
           MSE_sample  += self.model[key].MSE
           R2_sample   += self.model[key].R2
           Y_pred       = self.model[key](X_test)
-          Bias_sample += np.mean(Y_test-Y_pred)
+          Bias_sample += np.mean((Y_test-np.mean(Y_pred))**2)
           Var_sample  += np.var(Y_pred)
           l           += 1.
         # Adjust final resampled quantities
-        self.model[key].MSE_sample  = MSE_sample/l
-        self.model[key].R2_sample   = R2_sample/l
-        self.model[key].Bias_sample = Bias_sample/l
-        self.model[key].Var_sample  = Var_sample/l
+        self.model[key].MSE_sample = MSE_sample/l
+        self.model[key].R2_sample  = R2_sample/l
+        self.model[key].Bias       = Bias_sample/l
+        self.model[key].Var        = Var_sample/l
         # use the beta parameters from a non-resampled run
         self.save = False
         self.run_analysis(alpha)
@@ -207,6 +207,5 @@ class RegressionModel():
         np.save(path,[np.array([self.MSE,self.R2,alpha]),self.beta,self.std_beta])
       else:
         path = dirpath + "{:s}_{:s}_{:s}{:s}".format(str(method),str(self.name),str(technique),str(K))
-        np.save(path,[np.array([self.MSE_sample,self.R2_sample,alpha,self.Bias_sample,self.Var_sample]),
-                      self.beta,self.std_beta])
+        np.save(path,[np.array([self.MSE_sample,self.R2_sample,alpha,self.Bias,self.Var]),self.beta,self.std_beta])
 

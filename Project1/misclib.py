@@ -6,9 +6,9 @@ from matplotlib import cm
 from mpl_toolkits.mplot3d import Axes3D
 from LinearRegression import LinearRegression
 
-class ScalarField_PolynomialApproximation():
+class ScalarField_PolynomialParametrisation():
   """
-  Polynomial Approximation of an N-Dimensional Scalar Field (Surface). The polynomial parameters
+  Polynomial Parametrisation of an N-Dimensional Scalar Field (Surface). The polynomial parameters
   are determined via Linear Regression Analysis, which is performed by the LinearRegression() class.
   Input variables:
     X | matrix whose N columns are the independent variables
@@ -52,16 +52,18 @@ class ScalarField_PolynomialApproximation():
     for method in self.data.keys():
       for deg in self.P:
         if not deg in self.data[method].keys():
-          self.data[method][deg] = {}
+          self.data[method][deg] = []
 
   # run regression analysis
   def determine_coefficients(self,method,alpha,technique,K):
     self.LinReg.use_method(method)
     self.LinReg.run_analysis(alpha,technique,K)
     for deg in self.P:
-      idx = len(self.data[method][deg].keys())
       model = self.LinReg.model[deg]
-      self.data[method][deg][idx] = [alpha,model.MSE,model.R2,model.beta]
+      self.data[method][deg].append([alpha, model.MSE, model.R2, model.beta, model.std_beta])
+      if technique in ["Kfold","Bootstrap"]:
+        for element in [model.MSE_sample,model.R2_sample,model.Bias,model.Var,technique,K]:
+          self.data[method][deg][-1].append(element)
   
   # add polynomial(s) to the analysis
   def add_polynomial(self, deg):
@@ -80,11 +82,76 @@ class ScalarField_PolynomialApproximation():
     else:
       if deg in self.P: self.P.remove(deg)
   
-
-class Surface_PolynomialApproximation(ScalarField_PolynomialApproximation):
+  # plot the models' error dependency on the penalty
+  def plot_error_penalty_dependence(self, deg, technique="",K=1):
+    # setup
+    resampled = technique in ["Bootstrap","Kfold"]
+    methods   = ["OLS","Ridge","Lasso"]
+    fig1      = plt.figure(figsize=(10,8))
+    fig2      = plt.figure(figsize=(10,8))
+    ax11      = fig1.add_subplot(211)
+    ax12      = fig1.add_subplot(212)
+    ax21      = fig2.add_subplot(211)
+    ax22      = fig2.add_subplot(212)
+    if resampled:
+      fig3 = plt.figure(figsize=(10,8))
+      ax3  = fig3.add_subplot(111)
+    # extract data and plot
+    for i in range(3):
+      method        = methods[i]
+      alpha1,MSE,R2 = [],[],[]
+      if resampled:
+        alpha2,MSE_,R2_,Bias,Var = [],[],[],[],[]
+      for element in self.data[method][deg]:
+        resample = len(element) > 5
+        alpha1.append(element[0])
+        MSE.append(  element[1])
+        R2.append(   element[2])
+        if resample:
+          alpha2.append(element[0])
+          MSE_.append(element[5])
+          R2_.append( element[6])
+          Bias.append(element[7])
+          Var.append( element[8])
+      alpha1 = np.array(alpha1)
+      ax11.plot(alpha1,np.array(MSE),label=method)
+      ax12.plot(alpha1,np.array(R2), label=method)
+      if resampled:
+        alpha2 = np.array(alpha2)
+        ax21.plot(alpha2,np.array(MSE_),label=method)
+        ax22.plot(alpha2,np.array(R2_), label=method)
+        ax3.plot(alpha2,np.array(Bias),label=method+" Bias")
+        ax3.plot(alpha2,np.array(Var), label=method+" Var")
+    # extra plotting details
+    for ax,s in zip([ax11,ax12],["MSE",r"$R^2$"]):
+      ax.set_title(r"Dependence of {:s} on the penalty $\lambda$".format(s),fontsize=22)
+      ax.set_xlabel(r"$\lambda$",fontsize=20)
+      ax.set_ylabel(r"{:s}$(\lambda)$".format(s),fontsize=20)
+      ax.legend(loc="best")
+    fig1.tight_layout()
+    fig1.savefig(self.LinReg.dirpath+"error1_deg{:d}".format(deg))
+    if resampled:
+      ax21.set_title(r"Dependence of average MSE on the penalty $\lambda$" + \
+                      "\nAverage estimated via {:s} resampling with K = {:d}".format(technique,K),fontsize=22)
+      ax22.set_title(r"Dependence of average $R^2$ on the penalty $\lambda$" + \
+                      "\nAverage estimated via {:s} resampling with K = {:d}".format(technique,K),fontsize=22)
+      ax3.set_title( r"Penalty $\lambda$ Dependence of Model $Bias^2$ and Variance" + \
+                      "\nEstimated via {:s} resampling with K = {:d}".format(technique,K),fontsize=22)
+      for ax in [ax21,ax22,ax3]:
+        ax.legend(loc="best")
+        ax.set_xlabel(r"$\lambda$",fontsize=20)
+      ax21.set_ylabel(r"avg(MSE$(\lambda)$)",fontsize=20)
+      ax22.set_ylabel(r"avg($R^2(\lambda)$)",fontsize=20)
+      ax3.set_ylabel( r"$Bias^2$ or Variance",fontsize=20)
+      fig2.tight_layout()
+      [fig.savefig(self.LinReg.dirpath+"error{:d}_deg{:d}".format(n,deg)) for (fig,n) in zip([fig2,fig3],[2,3])]
+    plt.show()
+    
+  
+class Surface_PolynomialParametrisation(ScalarField_PolynomialParametrisation):
   """
-  Polynomial approximation of a surface z = f(x,y).
-  This is an expansion of the regular ScalarField_PolynomialApproximation class
+  Polynomial parametrisation of a surface z = f(x,y).
+  This is an expansion of the regular ScalarField_PolynomialParametrisation class
   whose primary function is plotting capabilities.
   """
       
@@ -132,9 +199,9 @@ class Surface_PolynomialApproximation(ScalarField_PolynomialApproximation):
     plt.savefig(dirpath+"{:s}.png".format(fig_name))
     plt.show()
 
-class Franke_PolynomialApproximation(Surface_PolynomialApproximation):
+class Franke_PolynomialParametrisation(Surface_PolynomialParametrisation):
   """
-  Polynomial approximation of Franke's Function via Linear Regression Analysis.
+  Polynomial parametrisation of Franke's Function via Linear Regression Analysis.
   Franke's function is a two-dimensional surface z = f(x,y) given by
     Franke = (3/4) g1 + (3/4) g2 + (1/2) g3 - (1/5) g4
   where
@@ -154,7 +221,7 @@ class Franke_PolynomialApproximation(Surface_PolynomialApproximation):
   @staticmethod
   def generate_noisy_data(N, sigma, x0=0, x1=1, y0=0, y1=1):
     x,y = rand.uniform(x0,x1,N),rand.uniform(y0,y1,N)
-    return x, y, Franke_PolynomialApproximation.eval(x,y) + sigma*rand.randn(N)
+    return x, y, Franke_PolynomialParametrisation.eval(x,y) + sigma*rand.randn(N)
   
   # compute Franke's function
   @staticmethod
@@ -178,27 +245,27 @@ class Franke_PolynomialApproximation(Surface_PolynomialApproximation):
   def plot_diff(self,method="OLS",deg=None,idx=0):
     deg, title, surf = self.prepare_plot(method,deg,idx,"diff")
     self.plot_contour(self.X,self.Y,surf-self.F,title,"diff_deg{:d}_{:s}".format(deg,method),self.LinReg.dirpath)
-
+  
   # prepare for plot
   def prepare_plot(self,method,deg,idx,plot_type):
     if deg is None: deg = sorted([key for key in self.data[method].keys()])[0]
-    penalty = self.data[method][deg][0]
+    penalty = self.data[method][deg][idx][0]
     surf    = self.build_surface(self.X,self.Y,method,deg,idx)
-    extra   = "" if method == "OLS" else r" Using $\lambda =$ " + str(penalty)
+    extra   = "" if method == "OLS" else r" Using $\lambda =$ {:e}".format(penalty)
     title_  = ["Surface Plot of ","of"] if plot_type=="model" else ["Difference Between ","and"]
-    title   = title_[0]+"{:s} Degree Polynomial Approximation ".format(self.ordinal(deg))+title_[1]+" Franke's Function\n" + \
-              "With Coefficients Determined by {:s} Regresion{:s}".format(method,extra)
+    title   = title_[0]+"{:s} Degree Polynomial Parametrisation ".format(self.ordinal(deg))+title_[1]+" Franke's Function\n" + \
+              "With Coefficients Determined by {:s} Regression{:s}".format(method,extra)
     surf    = self.build_surface(self.X,self.Y,method,deg,idx)
     return deg, title, surf
 
-class Terrain_PolynomialApproximation(Surface_PolynomialApproximation):
+class Terrain_PolynomialParametrisation(Surface_PolynomialParametrisation):
   """
-  Polynomial approximation of three-dimensional terrain-data stored in .tif files.
+  Polynomial Parametrisation of three-dimensional terrain-data stored in .tif files.
   The data is a surface z = f(x,y).
   """
   def __init__(self,filepath,nx=1,ny=1):
     self.filepath,terrain        = filepath,imread(filepath)
-    self.terrain                 = np.asarray(terrain)[::ny,::nx]
+    self.terrain                 = np.asarray(terrain)[::-ny,::nx]
     self.X,self.Y                = np.meshgrid(np.linspace(0,1,self.terrain.shape[1]),np.linspace(0,1,self.terrain.shape[0]))
     self.x,self.y,self.f         = [a.flatten() for a in [self.X,self.Y,self.terrain]]
     super().__init__(np.array([self.x,self.y]).T,self.f,"TerrainApprox")
@@ -221,11 +288,11 @@ class Terrain_PolynomialApproximation(Surface_PolynomialApproximation):
   # prepare for plot
   def prepare_plot(self,method,deg,idx,plot_type):
     if deg is None: deg = sorted([key for key in self.data[method].keys()])[0]
-    penalty = self.data[method][deg][0]
-    extra   = "" if method == "OLS" else r" Using $\lambda =$ " + str(penalty)
+    penalty = self.data[method][deg][idx][0]
+    extra   = "" if method == "OLS" else r" Using $\lambda =$ {:e}".format(penalty)
     title_  = ["Surface Plot of ","of"] if plot_type=="model" else ["Difference Between ","and"]
-    title   = title_[0]+"{:s} Degree Polynomial Approximation ".format(self.ordinal(deg))+title_[1]+" Terrain Data\n" + \
-              "With Coefficients Determined by {:s} Regresion{:s}".format(method,extra)
+    title   = title_[0]+"{:s} Degree Polynomial Parametrisation ".format(self.ordinal(deg))+title_[1]+" Terrain Data\n" + \
+              "With Coefficients Determined by {:s} Regression{:s}".format(method,extra)
     surf    = self.build_surface(self.X,self.Y,method,deg,idx)
     return deg, title, surf
 
