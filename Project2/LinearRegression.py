@@ -49,27 +49,14 @@ class LinearRegressor(object):
       return np.ravel(prediction) if ravel_output else prediction
     else: return 0
   
-  # compute the SVD of a matrix (wrapper for sp.linalg.svd)
-  @staticmethod
-  def SVD(X):
-    return svd(X,full_matrices=False,check_finite=False,lapack_driver="gesdd")
-  
   def enter_SVD(self,U,s,Vh):
     """
     Enter a precalculated Singular Value Decomposition of the design matrix before
-    running self.fit(). This function's implementation stems from the desire to
-    avoid having to decompose the design matrix twice in the same program.
+    running fit(). This function's implementation stems from the desire to avoid
+    having to decompose the design matrix twice in the same program.
     """
     self.U,self.s,self.Vh = U,s,Vh
     self.compute_SVD      = False
-  
-  # compute the Mean Squared Error metric
-  def MSE(self):
-    return mean_square_error(self.Y.ravel()+self.intercept,self.predict(X,ravel_output=True))
-  
-  # compute the R^2 score (Coefficient of Determinaion)
-  def R2(self,X):
-    return r2_score(self.Y.ravel()+self.intercept,self.predict(X,ravel_output=True))
 
 class OLSRegressor(LinearRegressor):
   """

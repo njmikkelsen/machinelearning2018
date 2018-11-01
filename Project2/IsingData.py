@@ -137,6 +137,7 @@ class IsingData(object):
       random   | this includes a random number of samples from any data set, uniformly distributed
     """
     def __init__(self,data_config='all'):
+      self.transposed = False
       self.NumPyfy_data()
       if   data_config in ['all','order','critical','disorder','noncrit']:
         self.load(data_config)
@@ -174,7 +175,15 @@ class IsingData(object):
     
     # pad a column of ones to X matrix (such that the intercept can be modelled)
     def pad_ones(self):
-      self.X = np.c_[np.ones(self.X.shape[0]),self.X]
+      if self.transposed:
+        self.X = np.c_[np.ones(self.X.shape[1]),self.X.T].T
+      else:
+        self.X = np.c_[np.ones(self.X.shape[0]),self.X]
+    
+    # transpose the input data
+    def transpose(self):
+      self.X          = self.X.T
+      self.transposed = True
     
     def NumPyfy_data(self):
       """
