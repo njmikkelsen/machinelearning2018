@@ -95,7 +95,7 @@ class IsingData(object):
       states = np.einsum('...i,...j->...ij',states,states)
       states = states.reshape((states.shape[0],states.shape[1]*states.shape[2]))
       # store final data set [X,T] = inputs & targets
-      self.X = states.T
+      self.X = states
       self.T = H
       
     # load a pre-existing data set
@@ -114,7 +114,7 @@ class IsingData(object):
       0 <= ratio <= 1  | (size of training set) / (size of test set)
       """
       if 0 <= ratio <= 1:
-        self.X_train,self.X_test,self.Y_train,self.Y_test = train_test_split(self.X.T,self.T,test_size=1-ratio)
+        self.X_train,self.X_test,self.Y_train,self.Y_test = train_test_split(self.X,self.T,test_size=1-ratio)
         self.X_train,self.X_test = self.X_train.T,self.X_test.T
       else:
         print("Error: ratio out of bounds: 0<=ratio<=1")
@@ -167,10 +167,14 @@ class IsingData(object):
       0 <= ratio <= 1  | (size of training set) / (size of test set)
       """
       if 0 <= ratio <= 1:
-        self.X_train,self.X_test,self.Y_train,self.Y_test = train_test_split(self.X.T,self.T,test_size=1-ratio)
+        self.X_train,self.X_test,self.Y_train,self.Y_test = train_test_split(self.X,self.T,test_size=1-ratio)
         self.X_train,self.X_test = self.X_train.T,self.X_test.T
       else:
         print("Error: ratio out of bounds: 0<=ratio<=1")
+    
+    # pad a column of ones to X matrix (such that the intercept can be modelled)
+    def pad_ones(self):
+      self.X = np.c_[np.ones(self.X.shape[0]),self.X]
     
     def NumPyfy_data(self):
       """
@@ -202,11 +206,11 @@ class IsingData(object):
         X_noncrit = np.concatenate([X_order,X_disorder])
         Y_noncrit = np.concatenate([Y_order,Y_disorder])
         # save data in NumPy files
-        np.save(path+'X_all.npy',     states.T)        
-        np.save(path+'X_order.npy',   X_order.T)
-        np.save(path+'X_critical.npy',X_critical.T)
-        np.save(path+'X_disorder.npy',X_disorder.T)
-        np.save(path+'X_noncrit.npy', X_noncrit.T)
+        np.save(path+'X_all.npy',     states)        
+        np.save(path+'X_order.npy',   X_order)
+        np.save(path+'X_critical.npy',X_critical)
+        np.save(path+'X_disorder.npy',X_disorder)
+        np.save(path+'X_noncrit.npy', X_noncrit)
 
         np.save(path+'Y_all.npy',     phases)
         np.save(path+'Y_order.npy',   Y_order)
