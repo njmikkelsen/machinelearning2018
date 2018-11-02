@@ -42,19 +42,17 @@ class computations(object):
       onehot_vector = np.zeros((n_inputs, n_categories))
       onehot_vector[range(n_inputs), integer_vector] = 1
       return onehot_vector
-    
-    
 
 class progress_bar(object):
   """
   A command-line progress bar for use in large loops (as a sanity check).
+  -----------------------------------------------------------------------
   Argument N = number of loop iterations. Usage:
-  -------------------------------
+
   BAR = misclib.progress_bar(N)
   for i in range(N):
     # do something
     BAR.update()
-  -------------------------------
   """
   def __init__(self,N):
     self.n = 0
@@ -67,11 +65,5 @@ class progress_bar(object):
       sys.stdout.write('\r[{:20s}] {:4.0f} % '.format('='*int(20*self.n/self.N),100.*self.n/self.N))
     else:
       sys.stdout.write('\r['+'='*20+']  100 % Done!\n')
-
-
-
-
-
-
 
 

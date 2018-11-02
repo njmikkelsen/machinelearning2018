@@ -2,6 +2,7 @@ import numpy as np
 from scipy.linalg import svd
 from sklearn.metrics import mean_squared_error, r2_score
 from sklearn.linear_model import Lasso
+from misclib import progress_bar, computations
 
 class LinearRegressor(object):
   """
@@ -9,15 +10,15 @@ class LinearRegressor(object):
   OLSRegressor, RidgeRegressor, LassoRegressor
   -------------------------------------------------------
   """
-  def __init__(self,standardize=True):
-    self.N_inputs    = 0            # number of predictors/#columns in design matrix
-    self.N_samples   = 0            # number of samples/#rows in design matrix
-    self.X           = 0            # regression inputs/design matrix
-    self.Y           = 0            # regression targets/outputs
-    self.alpha       = 0            # regularization parameter
-    self.standardize = standardize  # standardize data in preprocessing (remove mean and set std to unity)
-    self.regressed   = False        # regression completed
-    self.compute_SVD = True         # see self.enter_SVD()
+  def __init__(self,std=True):
+    self.N_inputs    = 0      # number of predictors/#columns in design matrix
+    self.N_samples   = 0      # number of samples/#rows in design matrix
+    self.X           = 0      # regression inputs/design matrix
+    self.Y           = 0      # regression targets/outputs
+    self.alpha       = 0      # regularization parameter
+    self.standardize = std    # standardize data in preprocessing (remove mean and set std to unity)
+    self.regressed   = False  # regression completed
+    self.compute_SVD = True   # see self.enter_SVD()
   
   # preprocessing regression variables X and Y
   def preprocess_data(self):
@@ -41,13 +42,14 @@ class LinearRegressor(object):
     self.preprocess_data()
     # compute regression coefficients (native to OLS, Ridge or Lasso)
     self.compute_coeff()
+    self.regressed = True
   
   # use regression coefficients to predict outcome
   def predict(self,X,ravel_output=True):
     if self.regressed:
-      prediction = X@self.coeff + self.intercept
+      prediction = (X)@(self.coeff) + self.intercept
       return np.ravel(prediction) if ravel_output else prediction
-    else: return 0
+    else: return None
   
   def enter_SVD(self,U,s,Vh):
     """
@@ -71,8 +73,7 @@ class OLSRegressor(LinearRegressor):
     if self.compute_SVD:
       self.U,self.s,self.V = LinearRegressor.SVD(self.X)
     # compute coeff vector
-    self.coeff     = (self.Vh.T) @ (np.diag(1./self.s)) @ (self.U.T) @ (self.Y)
-    self.regressed = True
+    self.coeff = (self.Vh.T) @ (np.diag(1./self.s)) @ (self.U.T) @ (self.Y)
 
 class RidgeRegressor(LinearRegressor):
   """
@@ -87,8 +88,7 @@ class RidgeRegressor(LinearRegressor):
     if self.compute_SVD:
       self.U,self.s,self.V = LinearRegressor.SVD(self.X)
     # compute coeff vector
-    self.coeff     = (self.Vh.T) @ (np.diag(self.s/(self.s**2+self.alpha))) @ (self.U.T) @ (self.Y)
-    self.regressed = True
+    self.coeff = (self.Vh.T) @ (np.diag(self.s/(self.s**2+self.alpha))) @ (self.U.T) @ (self.Y)
 
 class LassoRegressor(LinearRegressor):
   """
@@ -96,15 +96,53 @@ class LassoRegressor(LinearRegressor):
   -------------------------------------------------------------------------------
   This class is a wrapper for scikit-learn's "sklearn.linear_model.Lasso" class.
   """
-  def __init__(self,standardize=True):
-    self.sklearn_Lasso = Lasso(fit_intercept=standardize,normalize=standardize)
-    super().__init__(standardize)
-    self.standardize = False  # let scikit-learn handle preprocessing
+  def __init__(self,std=True):
+    self.sklearn_Lasso = Lasso(fit_intercept=std,normalize=std)
+    super().__init__(std)
+    self.std = False  # let scikit-learn handle preprocessing
   
   # regress X on Y
   def compute_coeff(self):
     self.sklearn_Lasso.set_params(self.alpha)
     self.sklearn_Lasso.fit()
-    self.coeff     = self.sklearn_Lasso.coef_
-    self.regressed = True
+    self.coeff = self.sklearn_Lasso.coef_
 
+class JackknifeResampler(object):
+  """
+  Jackknife Resampler for Linear Regressor objects
+  --------------------------------------------------
+  """
+  def __init__(self,Regressor,B):
+    self.LinReg      = Regressor
+    self.B           = Regressor.N_samples-1
+    
+  def run_resampling(self,X,Y,Lambda):
+    self.MSE  = np.zeros(X.shape[0])
+    self.R2   = np.zeros(X.shape[0])
+    self.Bias = np.zeros(X.shape[0])
+    self.Var  = np.zeros(X.shape[0])
+    print("running Jackknife resampling...")
+    progress = progress_bar(self.B*len(Lambda))
+    for i,lmbda in enumerate(Lambda):
+      # initial regression
+      self.LinReg.fit(X,Y,alpha=lmbda)
+      prediction  = self.LinReg.predict(X)
+      self.MSE[i] = computations.metrics.MSE(Y,prediction)
+      self.R2[i]  = computations.metrics.R2( Y,prediction)
+      # resampling
+      jack = np.zeros(X.shape[0]-1)
+      for b in range(self.B):
+        # Jackknife sample
+        X_jack = np.delete(X_train,b,0)
+        Y_jack = np.delete(Y_train,b,0)
+        # regression
+        self.LinReg.fit(X_jack,Y_jack,alpha=lmbda)
+        prediction = self.LinReg.predict(X_jack)
+        jack[i]    = computations.metrics.MSE(Y_jack,prediction)
+        # update command-line progress bar
+        progress.update()
+      # estimate bias and variance
+      SUM  = np.mean(jack)
+      self.Bias[i] = (self.B-1.)*(self.MSE[i]-SUM)/self.B
+      self.Var[i]  = (self.B-1.)*np.sum((jack-SUM)**2)/self.B
+  
