@@ -59,16 +59,21 @@ class IsingData(object):
     Default behaviour is to load the previously generated data set if it exists.
     """
     # initialize data set
-    def __init__(self,N,J,M,new_data=False):
-      self.N,self.J,self.M = N,J,M
-      self.datadir = "./IsingData/one_dim/{:d}_{:f}_{:d}/".format(N,J,M)
+    def __init__(self,N,J,M,sigma_s=0.5,sigma_H=2,new_data=False):
+      self.N,self.J,self.M,self.sigma_s,self.sigma_H = N,J,M,sigma_s,sigma_H
+      self.datadir    = "./IsingData/one_dim/{:d}_{:f}_{:d}_{:f}_{:f}/".format(N,J,M,sigma_s,sigma_H)
+      self.transposed = False  # indicates whether data is transposed
+      self.data_split = False  # indicates whether data is split into training and test sets
+      self.padded     = False  # indicates whether data has been padded with ones (for intercept)
       self.check_exists()
       if not self.exists or new_data:
         self.generate_data()
         if not self.exists:
-          self.save_data()
+          np.save(self.datadir+"X.npy",self.X)
+          np.save(self.datadir+"T.npy",self.T)
       else:
-        self.load_data()
+        self.X = np.load(self.datadir+"X.npy")
+        self.T = np.load(self.datadir+"T.npy")
     
     # check if data has already been generated
     def check_exists(self):
@@ -94,30 +99,54 @@ class IsingData(object):
       # recast states array for regression
       states = np.einsum('...i,...j->...ij',states,states)
       states = states.reshape((states.shape[0],states.shape[1]*states.shape[2]))
-      # store final data set [X,T] = inputs & targets
-      self.X = states
-      self.T = H
-      
-    # load a pre-existing data set
-    def load_data(self):
-      self.X = np.load(self.datadir+"X.npy")
-      self.T = np.load(self.datadir+"T.npy")
+      # store final data set (X,T) = (inputs + error, targets + error)
+      self.X = states + self.sigma_s*np.random.randn(*states.shape)
+      self.T = H      + self.sigma_H*np.random.randn(*H.shape)
+
+    # pad a column of ones to X matrix (such that the intercept can be modelled)
+    def pad_ones(self):
+      # pad full data
+      if self.transposed: self.X = np.c_[np.ones(self.X.shape[1]),self.X.T].T
+      else:               self.X = np.c_[np.ones(self.X.shape[0]),self.X]
+      # pad split data
+      if self.data_split:
+        if self.transposed:
+          self.X_train = np.c_[np.ones(self.X_train.shape[1]),self.X_train.T].T
+          self.X_test  = np.c_[np.ones(self.X_test.shape[1]), self.X_test.T].T
+        else:
+          self.X_train = np.c_[np.ones(self.X_train.shape[0]),self.X_train]
+          self.X_test  = np.c_[np.ones(self.X_test.shape[0]), self.X_test]
+      self.padded = True
     
-    # save the newly-generated data set
-    def save_data(self):
-      np.save(self.datadir+"X.npy",self.X)
-      np.save(self.datadir+"T.npy",self.T)
+    # transpose the input data
+    def transpose(self):
+      # transpose full data
+      self.X = self.X.T
+      # transpose split data
+      if self.data_split:
+        self.X_train = self.X_train.T
+        self.X_test  = self.X_test.T
+      self.tranposed = not self.transposed
     
     # divide data set into training and test sets
-    def split (self,ratio=0.5):
+    def split(self,ratio=0.5):
       """
       0 <= ratio <= 1  | (size of training set) / (size of test set)
       """
       if 0 <= ratio <= 1:
-        self.X_train,self.X_test,self.Y_train,self.Y_test = train_test_split(self.X,self.T,test_size=1-ratio)
-        self.X_train,self.X_test = self.X_train.T,self.X_test.T
+        if self.transposed:
+          self.X_train,self.X_test,self.Y_train,self.Y_test = train_test_split(self.X.T,self.T,test_size=1-ratio)
+        else:
+          self.X_train,self.X_test,self.Y_train,self.Y_test = train_test_split(self.X,self.T,test_size=1-ratio)
+        self.data_split = True
       else:
         print("Error: ratio out of bounds: 0<=ratio<=1")
+    
+    # convert a single-dimensional J parameter vector to a two-dimensional J parameter matrix
+    @staticmethod
+    def J_vec_to_matrix(J):
+      N = int(np.sqrt(np.size(J)))
+      return np.array(J).reshape((N,N))
       
 
   class two_dim(object):
@@ -138,6 +167,7 @@ class IsingData(object):
     """
     def __init__(self,data_config='all'):
       self.transposed = False
+      self.data_split = False
       self.NumPyfy_data()
       if   data_config in ['all','order','critical','disorder','noncrit']:
         self.load(data_config)
@@ -147,6 +177,8 @@ class IsingData(object):
         print('Error: invalid data configuration.')
         print('Using all data sets instead')
         self.load('all')
+      self.X = self.X.astype(np.int8)
+      self.T = self.T[:,None]
     
     # load the desired data sets
     def load(self,data_config):
@@ -168,22 +200,38 @@ class IsingData(object):
       0 <= ratio <= 1  | (size of training set) / (size of test set)
       """
       if 0 <= ratio <= 1:
-        self.X_train,self.X_test,self.Y_train,self.Y_test = train_test_split(self.X,self.T,test_size=1-ratio)
-        self.X_train,self.X_test = self.X_train.T,self.X_test.T
+        if self.transposed:
+          self.X_train,self.X_test,self.Y_train,self.Y_test = train_test_split(self.X.T,self.T,test_size=1-ratio)
+          self.X_train,self.X_test = self.X_train.T,self.X_test.T
+        else:
+          self.X_train,self.X_test,self.Y_train,self.Y_test = train_test_split(self.X,self.T,test_size=1-ratio)
+        self.data_split = True
       else:
         print("Error: ratio out of bounds: 0<=ratio<=1")
     
     # pad a column of ones to X matrix (such that the intercept can be modelled)
     def pad_ones(self):
       if self.transposed:
-        self.X = np.c_[np.ones(self.X.shape[1]),self.X.T].T
+        self.X = np.c_[np.ones(self.X.shape[1],dtype=np.int8),self.X.T].T
       else:
-        self.X = np.c_[np.ones(self.X.shape[0]),self.X]
+        self.X = np.c_[np.ones(self.X.shape[0],dtype=np.int8),self.X]
     
     # transpose the input data
     def transpose(self):
-      self.X          = self.X.T
-      self.transposed = True
+      # transpose full data
+      self.X = self.X.T
+      # transpose split data
+      if self.data_split:
+        self.X_train = self.X_train.T
+        self.X_test  = self.X_test.T
+      self.transposed = not self.transposed
+    
+    # transform 1-dim target vector to a one-hot vector for use in neural networks
+    def make_hot(self):
+      self.T = to_categorical_numpy(self.T.flatten()).T
+      if self.data_split:
+        self.Y_train = to_categorical_numpy(self.Y_train.flatten()).T
+        self.Y_test  = to_categorical_numpy(self.Y_test.flatten()).T
     
     def NumPyfy_data(self):
       """
@@ -226,8 +274,18 @@ class IsingData(object):
         np.save(path+'Y_critical.npy',Y_critical)
         np.save(path+'Y_disorder.npy',Y_disorder)
         np.save(path+'Y_noncrit.npy', Y_noncrit)
-  
-  
+
+# one-hot in numpy
+def to_categorical_numpy(integer_vector):
+  """
+  This function was copied from the lecture notes on Neural Networks found here:
+  https://compphysics.github.io/MachineLearning/doc/pub/NeuralNet/html/._NeuralNet-bs046.html
+  """
+  n_inputs = len(integer_vector)
+  n_categories = np.max(integer_vector) + 1
+  onehot_vector = np.zeros((n_inputs, n_categories))
+  onehot_vector[range(n_inputs), integer_vector] = 1
+  return onehot_vector
   
 if __name__ == '__main__':
   # generates/prepares the standard data sets if not already done
