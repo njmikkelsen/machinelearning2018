@@ -1,0 +1,9 @@
+1        # hidden layer activation function:  0=logit,  1=tanh
+50       # no. nodes in hidden layer
+1.0e-2   # initial std in layer weights
+1.0e-2   # initial const bias
+1.0e-1   # initial learning rate
+1.0e-1   # learning rate falloff parameter
+30       # number of epochs
+100      # number of batches
+0.0e0    # regularization parameter
