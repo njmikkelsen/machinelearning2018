@@ -3,7 +3,7 @@ The following list contains a short description of all the programs used in Proj
 #############################################################################################################
 
 Library programs:
-  These programs are built as libraries hosting functions, classes, etc., used throughout the project.
+  These programs are built as libraries hosting functions, classes, etc., that are used throughout the project.
 -------------------------------------------------------------------------------------------------------------
   IsingData.py              | Contains a "IsingData" class, which gives access to the Ising data used in the project.
   LinearRegression.py       | Contains all class structures necessary for linear regression programs, in particular "OLSRegressor", "RidgeRegressor" & "LassoRegressor".
@@ -16,8 +16,8 @@ Library programs:
 #############################################################################################################
 
 Linear regression programs:
-  These programs perform the linear regression analyses of the project. The linear regression methods are only
-  used on the one-dimensional Ising data.
+  These programs perform the linear regression analyses of the project.
+  The linear regression methods are only used on the one-dimensional Ising data.
 -------------------------------------------------------------------------------------------------------------
   LinReg_gridsearch.py         | Performs OLS, Ridge & Lasso regression for several logarithmically spaced regularization strengths lambda on both training and test data, then plots all results on the same axes.
   LinReg_gridsearch_sklearn.py | Same as "LinReg_gridsearch.py", however implemented using only sci-kit learn.
@@ -27,8 +27,8 @@ Linear regression programs:
 #############################################################################################################
 
 Logistic regression programs:
-  These programs perform the logistic regression analyses of the project. The logistic regressor is only
-  applied to the two-dimensional Ising data.
+  These programs perform the logistic regression analyses of the project.
+  The logistic regressor is only applied to the two-dimensional Ising data.
 -------------------------------------------------------------------------------------------------------------
   LogReg_train.py | Performs logistic regression for specific parameters using gradient descent, plots the evolution of accuracy (during gradient descent) and saves the regressor.
   LogReg_test.py  | Loads the regressor object from "LogReg_train.py" and evaluates its accuracy on the 'critical' data set.
@@ -36,8 +36,10 @@ Logistic regression programs:
 #############################################################################################################
 
 Neural networks programs:
-  These programs perform the neural network training and evaluation of the project. The neural networks are
-  applied both the one-dimensional data and the two-dimensional data.
+  These programs perform the neural network training and evaluation of the project.
+  The neural networks are applied both the one-dimensional data and the two-dimensional data. However,
+  the regression     networks are exclusively used on the one-dimensional data and
+  the classification networks are exclusively used on the two-dimensional data.
 -------------------------------------------------------------------------------------------------------------
   NNReg_train.py   | Trains the neural network with respect to the parameters in the config file "config.dat" for regression, then writes the prediction results to file, plots the R^2 evolution and finally saves the neural network.
   NNReg_hyper1.py  | Trains a neural network partially with respect to the parameters in the config file "config.dat" for regression, but also with various hyperparameters lambda (regularization strength) and eta (learning rate). Plots the results.
