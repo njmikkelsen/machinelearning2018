@@ -1,0 +1,50 @@
+The following list contains a short description of all the programs used in Project 2.
+
+#############################################################################################################
+
+Library programs:
+  These programs are built as libraries hosting functions, classes, etc., that are used throughout the project.
+-------------------------------------------------------------------------------------------------------------
+  IsingData.py              | Contains a "IsingData" class, which gives access to the Ising data used in the project.
+  LinearRegression.py       | Contains all class structures necessary for linear regression programs, in particular "OLSRegressor", "RidgeRegressor" & "LassoRegressor".
+  LogisticClassification.py | Contains a "LogisticClassifier" class.
+  NeuralNetwork.py          | Contains the own neural network codes for both regression and classification problems.
+  matplotlibrc              | Default rcparams for matplotlib.
+  misclib.py                | Contains various functions and the "progress_bar" class.
+  plotlib.py                | Contains functions for plotting misc plots through the analysis programs. This file was included to avoid long and tedius plotting commands in other files.
+
+#############################################################################################################
+
+Linear regression programs:
+  These programs perform the linear regression analyses of the project.
+  The linear regression methods are only used on the one-dimensional Ising data.
+-------------------------------------------------------------------------------------------------------------
+  LinReg_gridsearch.py         | Performs OLS, Ridge & Lasso regression for several logarithmically spaced regularization strengths lambda on both training and test data, then plots all results on the same axes.
+  LinReg_gridsearch_sklearn.py | Same as "LinReg_gridsearch.py", however implemented using only sci-kit learn.
+  LinReg_plotJ.py              | Performs OLS, Ridge or and Lasso regression for specific parameters and plots the resulting J-matrix solution.
+  LinReg_decomp.py             | Performs a Bias-Variance decomposition of either OLS, Ridge or Lasso for several logarithmically spaced regularization strengths lambda using the Bootstrap technique, then plots the results.
+
+#############################################################################################################
+
+Logistic regression programs:
+  These programs perform the logistic regression analyses of the project.
+  The logistic regressor is only applied to the two-dimensional Ising data.
+-------------------------------------------------------------------------------------------------------------
+  LogReg_train.py | Performs logistic regression for specific parameters using gradient descent, plots the evolution of accuracy (during gradient descent) and saves the regressor.
+  LogReg_test.py  | Loads the regressor object from "LogReg_train.py" and evaluates its accuracy on the 'critical' data set.
+
+#############################################################################################################
+
+Neural networks programs:
+  These programs perform the neural network training and evaluation of the project.
+  The neural networks are applied both the one-dimensional data and the two-dimensional data. However,
+  the regression     networks are exclusively used on the one-dimensional data and
+  the classification networks are exclusively used on the two-dimensional data.
+-------------------------------------------------------------------------------------------------------------
+  NNReg_train.py   | Trains the neural network with respect to the parameters in the config file "config.dat" for regression, then writes the prediction results to file, plots the R^2 evolution and finally saves the neural network.
+  NNReg_hyper1.py  | Trains a neural network partially with respect to the parameters in the config file "config.dat" for regression, but also with various hyperparameters lambda (regularization strength) and eta (learning rate). Plots the results.
+  NNReg_hyper2.py  | Similar to "NNReg_hyper2.py", however with hyperparameters #epochs and exponential falloff alpha.
+  NNClass_train.py | Same as "NNReg_train.py", however trained for classification.
+  NNClass_test.py  | Loads the neural network from "NNClass_train.py" and evaluates its accuracy on the 'critical' data set.
+
+#############################################################################################################
