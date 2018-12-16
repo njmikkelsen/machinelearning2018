@@ -1,0 +1,29 @@
+The following list is an explanation of the naming conventions used by the files in this directory.
+
+NNgridsearch1:
+- The NumPy files are labelled "gridsearch1_{activation}{tag}".
+  x The {activation} keyword denotes the activation function used in the neural network.
+    It can take one out of the following three strings: "logistic", "tanh" or "relu"
+  x The {tag} keyword is an additional integer that separates NumPy files with the same activation function.
+
+- The image files follow the same naming convention as the NumPy files.
+
+NNgridsearch2:
+- The NumPy files are labelled "gridsearch2_{L}_{N}_{activation}{tag}".
+  x The {L}          keyword denotes the number of layers used in the neural network.
+  x The {N}          keyword denotes the number of nodes per layer used in the network.
+  x The {activation} keyword is the same as in NNgridsearch1.
+  x The {tag}        keyword is the same as in NNgridsearch1.
+
+- The image files follow the same naming convention as the NumPy files.
+
+NNgridsearch3:
+- The NumPy files are labelled "gridsearch2_{L}_{N}_{gamma0}_{eta}_{tag}".
+  x The {L}          keyword is the same as in NNgridsearch2.
+  x The {N}          keyword is the same as in NNgridsearch2.
+  x The {gamma0}     keyword denotes the neural network's initial learning rate.
+  x The {eta}        keyword denotes the neural network's momentum strength.
+  x The {activation} keyword is the same as in NNgridsearch1.
+  x The {tag}        keyword is the same as in NNgridsearch1.
+
+- The image files are labelled 

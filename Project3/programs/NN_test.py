@@ -10,7 +10,7 @@ Targets    = np.loadtxt(path,dtype=np.int_,  skiprows=1,delimiter=",",usecols=(8
 Targets[Targets==0] = -1
 
 # divide data into training and test sets
-train_size = 0.001
+train_size = 0.5
 Predictors_train,Predictors_test,Targets_train,Target_test = \
 train_test_split(Predictors,Targets,train_size=train_size,test_size=1-train_size)
 
