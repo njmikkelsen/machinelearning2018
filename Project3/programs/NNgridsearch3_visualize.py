@@ -33,39 +33,50 @@ Program parameters:
 """
 
 # data parameters
-load_production = True
-tag             = "1"
-L               = 5
-N               = 20
-gamma0          = 0.001000
-eta             = 0.900000
+tag = sys.argv[1]
+L   = int(sys.argv[2])
+N   = int(sys.argv[3])
 
 # load data
-[[train_size],[Accuracy,Epochs,Timing]] = np.load("../results/NN/npy/gridsearch3_{:d}_{:d}_{:f}_{:f}_{:s}.npy".format(L,N,gamma0,eta,tag))
+[[train_size],[Accuracy,Epochs,Timing]] = np.load("../results/NN/npy/gridsearch3_{:d}_{:d}_{:s}.npy".format(L,N,tag))
+
+# plot thresholds
+epochs_max = 5000
+timing_max = 100
+
+Epochs[Epochs > epochs_max] = None
+Timing[Timing > timing_max] = None
 
 # plot results as images
 labels = ["logistic","tanh","relu"]
-cs     = ["r","b","g"]
+cs     = ["r","b","g"]  
 
 fig,axes = plt.subplots(nrows=3,ncols=1,sharex=True,figsize=(5,9.5))
 
 for i in range(3):
-  axes[0].plot(train_size,Accuracy[i],label=labels[i],c=cs[i])
-  axes[0].plot(train_size,Epochs[i],  label=labels[i],c=cs[i])
-  axes[0].plot(train_size,Timing[i],  label=labels[i],c=cs[i])
+  axes[0].plot(100*train_size,Accuracy[:,i],label=labels[i],c=cs[i])
+  axes[1].plot(100*train_size,Epochs[:,i],  label=labels[i],c=cs[i])
+  axes[2].plot(100*train_size,Timing[:,i],  label=labels[i],c=cs[i])
 
-fig.suptitle("Neural network w/ {:s} activation".format(activation),fontsize=18)
+axes[0].legend(loc='best')
+axes[1].legend(loc='best')
+axes[2].legend(loc='best')
 
-axes[2].set_xlabel("train-to-test set ratio",fontsize=18)
-axes[0].set_ylabel("accuray",                fontsize=18)
-axes[1].set_ylabel("epochs",                 fontsize=18)
-axes[2].set_ylabel("timing",                 fontsize=18)
+#fig.suptitle("{:d} layers w/ {:d} nodes per layer".format(L,N),x=0.5,y=0.99,fontsize=18)
+#fig.suptitle("simple networks".format(L,N),x=0.5,y=0.99,fontsize=18)
+fig.suptitle("complex networks".format(L,N),x=0.5,y=0.99,fontsize=18)
+
+axes[2].set_xlabel("training set size [%]",fontsize=18)
+axes[0].set_ylabel("accuracy scores",      fontsize=18)
+axes[1].set_ylabel("number of epochs",     fontsize=18)
+axes[2].set_ylabel("training times [sec]", fontsize=18)
+
+axes[2].set_xlim([10,90])
 
 plt.tight_layout()
-fig.subplots_adjust(top=0.92)
+fig.subplots_adjust(top=0.94)
 
-plt.savefig("../results/NN/img/gridsearch3_{:d}_{:d}_{:s}{:s}.png".format(L,N,activation,tag))
+plt.savefig("../results/NN/img/gridsearch3_{:d}_{:d}_{:s}.png".format(L,N,tag))
 plt.show()
-
 
 

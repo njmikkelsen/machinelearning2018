@@ -203,7 +203,9 @@ fig.colorbar(im1,ax=axes[0],fraction=0.06)
 fig.colorbar(im2,ax=axes[1],fraction=0.06)
 fig.colorbar(im3,ax=axes[2],fraction=0.06)
 
-fig.suptitle("{:s} activation".format(activation),x=0.5,y=0.99,fontsize=18)
+#fig.suptitle("{:s} activation".format(activation),x=0.5,y=0.99,fontsize=18)
+fig.suptitle("sigmoid activation".format(activation),x=0.5,y=0.99,fontsize=18)
+#fig.suptitle("rectifier activation".format(activation),x=0.5,y=0.99,fontsize=18)
 
 axes[0].set_title("accuracy scores",     fontsize=18)
 axes[1].set_title("number of epochs",    fontsize=18)

@@ -41,7 +41,6 @@ Program parameters:
   train_size      | train-to-test ratio in division of data into training and test sets
   load_production | load produced results (instead of producing new results): True or False
   tag             | extra save tag used in np.save/np.load of results
-  production_path | path for produced results
 
 parameters used in tag = 1
 -------------------
@@ -86,10 +85,6 @@ N_max      = 30
 N_N        = 30
 train_size = 0.5
 
-# generate L and N arrays
-L = np.linspace(L_min,L_max,L_N).astype(int)
-N = np.linspace(N_min,N_max,N_N).astype(int)
-
 # load pulsar data | IPP = Integrated Pulse Profile, DM-SNR = DispersionMeasure - Signal-Noise-Ratio,
 path       =  "../data/pulsar_stars.csv"
 Predictors = np.loadtxt(path,dtype=np.float_,skiprows=1,delimiter=",",usecols=(0,1,2,3,4,5,6,7))
@@ -110,6 +105,10 @@ if load_production:
 
 # produce new results
 else:
+  # generate L and N arrays
+  L = np.linspace(L_min,L_max,L_N).astype(int)
+  N = np.linspace(N_min,N_max,N_N).astype(int)
+  
   # prepare result arrays
   Accuracy = np.zeros((L_N,N_N))
   Epochs   = np.zeros((L_N,N_N))
@@ -204,7 +203,9 @@ fig.colorbar(im1,ax=axes[0],fraction=0.06)
 fig.colorbar(im2,ax=axes[1],fraction=0.06)
 fig.colorbar(im3,ax=axes[2],fraction=0.06)
 
-fig.suptitle("{:s} activation".format(activation),x=0.5,y=0.99,fontsize=20)
+#fig.suptitle("{:s} activation".format(activation),x=0.5,y=0.99,fontsize=20)
+#fig.suptitle("sigmoid activation".format(activation),x=0.5,y=0.99,fontsize=20)
+fig.suptitle("rectifier activation".format(activation),x=0.5,y=0.99,fontsize=20)
 
 axes[0].set_title("accuracy scores",     fontsize=18)
 axes[1].set_title("number of epochs",    fontsize=18)

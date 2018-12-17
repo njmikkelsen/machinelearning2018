@@ -37,20 +37,34 @@ Program parameters:
   train_size_N    | number of train_size values to iterate over
   overwrite       | whether to overwrite existing results: True or False
   tag             | extra save tag used in np.save/np.load of results
-  production_path | path for produced results
+
+parameters used in tag = 1
+-------------------
+gamma0 = 0.1
+eta    = 0.3
+
+parameters used in tag = 2
+-------------------
+gamma0 = 0.01
+eta    = 0.5
+
+parameters used in tag = 3
+-------------------
+gamma0 = 0.001
+eta    = 0.7
 """
 # master parameters
 overwrite = True
-tag       = "2"
+tag       = sys.argv[1]
 
 # parameters for production
-L              = int(sys.argv[1])
-N              = int(sys.argv[2])
-gamma0         = 1e-3
-eta            = 0.9
+L              = int(sys.argv[2])
+N              = int(sys.argv[3])
+gamma0         = float(sys.argv[4])
+eta            = float(sys.argv[5])
 train_size_min = 0.1
 train_size_max = 0.9
-train_size_N   = 5
+train_size_N   = 100
 
 # generate train_size array
 train_size = np.linspace(train_size_min,train_size_max,train_size_N)
@@ -74,21 +88,20 @@ Timing   = np.zeros((train_size_N,3))
 
 # production loops
 sanity = progress_bar(3*train_size_N)
-for i,t in enumerate(train_size):
-  for j,activation in enumerate(["logistic","tanh","relu"]):
+for j,activation in enumerate(["logistic","tanh","relu"]):
+  # setup network
+  Classifier = MLPClassifier( \
+    hidden_layer_sizes = [N for _ in range(L)],
+    activation         = activation,
+    solver             = "sgd",
+    learning_rate_init = gamma0,
+    momentum           = eta,
+    learning_rate      = "adaptive",
+    max_iter           = 100000)
+  for i,t in enumerate(train_size):
     # divide data into training and test sets
     Predictors_train,Predictors_test,Targets_train,Targets_test = \
     train_test_split(Predictors,Targets,train_size=t,test_size=1-t)
-
-    # setup network
-    Classifier = MLPClassifier( \
-      hidden_layer_sizes = [N for _ in range(L)],
-      activation         = activation,
-      solver             = "sgd",
-      learning_rate_init = gamma0,
-      momentum           = eta,
-      learning_rate      = "adaptive",
-      max_iter           = 1000)
     
     # train network
     time_0 = time.perf_counter()
@@ -106,6 +119,6 @@ for i,t in enumerate(train_size):
     # update command line progress bar
     sanity.update()
 # save new results
-np.save("../results/NN/npy/gridsearch3_{:d}_{:d}_{:f}_{:f}_{:s}.npy".format(L,N,gamma0,eta,tag), \
+np.save("../results/NN/npy/gridsearch3_{:d}_{:d}_{:s}.npy".format(L,N,tag), \
 [[train_size],[Accuracy,Epochs,Timing]])
 
